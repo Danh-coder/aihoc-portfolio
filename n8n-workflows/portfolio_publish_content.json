@@ -202,6 +202,21 @@
         1360,
         380
       ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.vercel.com/v1/integrations/deploy/prj_1Wp6YoheiZIN4ClVv9m9qwuK1DLu/9vOAJAjy49",
+        "options": {}
+      },
+      "id": "trigger-vercel-deploy-hook",
+      "name": "Trigger Vercel Deploy Hook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1560,
+        380
+      ]
     }
   ],
   "connections": {
@@ -287,6 +302,11 @@
         [
           {
             "node": "Respond: Publish Success",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Trigger Vercel Deploy Hook",
             "type": "main",
             "index": 0
           }
