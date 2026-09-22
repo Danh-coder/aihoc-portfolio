@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.0.0",
+  "siteName": "Danh Phan",
+  "headline": "AI Engineer & AI Automation Developer",
+  "valueProposition": "I design and deliver practical AI agents, intelligent document systems, and workflow automation for real business operations.",
+  "aboutShort": "AI Engineer and Automation Developer specializing in LLM applications, autonomous n8n workflows, Computer Vision/OCR, and tailored management systems.",
+  "aboutLong": "With a strong engineering background and hands-on experience delivering enterprise automation, I bridge the gap between cutting-edge AI models and everyday business operations.\n\nMy philosophy focuses on pragmatic engineering: choosing the simplest architecture that reliably solves the problem, putting human verification on high-risk AI decisions, ensuring data sovereignty, and providing comprehensive documentation and handover.",
+  "contactCta": "Discuss a Project",
+  "defaultLocale": "en",
+  "timezone": "Asia/Seoul",
+  "contactEmailPublic": "danh@aihoc.ai.vn",
+  "zaloUrl": "https://zalo.me/0900000000",
+  "linkedinUrl": "https://www.linkedin.com/in/danhphan",
+  "githubUrl": "https://github.com/danhphan",
+  "cvUrl": null,
+  "analyticsProvider": "none",
+  "analyticsSiteId": null
+}

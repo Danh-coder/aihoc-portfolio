@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0.0",
+  "snapshotVersion": "20260922T142126_a6ed0bea",
+  "generatedAt": "2026-09-22T14:21:26.023Z",
+  "projectCount": 11,
+  "serviceCount": 6,
+  "contentSha256": "a6ed0beacde96bf0dfd1ad0b4a3943c0e0366427c4580aab3b1ac18f09789b29",
+  "source": "google-sheets-n8n-sync"
+}

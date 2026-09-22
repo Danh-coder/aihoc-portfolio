@@ -1,0 +1,157 @@
+{
+  "name": "portfolio_backup_and_healthcheck",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "daysInterval": 1,
+              "triggerAtHour": 2,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "id": "daily-cron",
+      "name": "Daily 02:00 AM Cron",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [180, 280]
+    },
+    {
+      "parameters": {
+        "url": "https://portfolio.aihoc.ai.vn/api/health",
+        "options": {}
+      },
+      "id": "check-health",
+      "name": "Check Public Site Health",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [400, 280]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "1Oh6nSGPoPT54wAPrvurTxGHt7gSzD8KK3L5v5XHtuKo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Projects",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "export-projects",
+      "name": "Export Projects Tab",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.3,
+      "position": [620, 200],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "PWP0jEt8UfzeWh3W",
+          "name": "Google Sheets account - Zally"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "1Oh6nSGPoPT54wAPrvurTxGHt7gSzD8KK3L5v5XHtuKo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "export-leads",
+      "name": "Export Leads Tab",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.3,
+      "position": [620, 360],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "PWP0jEt8UfzeWh3W",
+          "name": "Google Sheets account - Zally"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const health = $items('Check Public Site Health')[0]?.json;\nif (!health || health.status !== 'ok') {\n  return [{ json: { isHealthy: false, health, date: new Date().toISOString() } }];\n}\nreturn [{ json: { isHealthy: true, health, date: new Date().toISOString() } }];"
+      },
+      "id": "verify-status",
+      "name": "Verify Status",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [840, 280]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.isHealthy }}",
+              "value2": false
+            }
+          ]
+        }
+      },
+      "id": "if-unhealthy",
+      "name": "If Unhealthy",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1060, 280]
+    },
+    {
+      "parameters": {
+        "sendTo": "zally.aihoc@gmail.com",
+        "subject": "=\uD83D\uDEA8 [CRITICAL] Portfolio Website Health Check FAILED – {{ $json.date }}",
+        "message": "=<h2 style=\"color:#d93025\">\uD83D\uDEA8 Portfolio Website is DOWN</h2>\n<p><strong>Timestamp:</strong> {{ $json.date }}</p>\n<h3>Health Check Details</h3>\n<pre style=\"background:#f5f5f5;padding:16px;border-radius:4px;overflow:auto\">{{ JSON.stringify($json.health, null, 2) }}</pre>\n<hr style=\"margin:20px 0;border:none;border-top:1px solid #eee\">\n<p style=\"color:#888;font-size:12px\">This is an automated alert from the AIHOC Portfolio n8n health monitor. Check the server logs and restart if needed.</p>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "alert-owner-email",
+      "name": "Alert Owner of Outage",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [1280, 200],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "6Zb7F76fYWjiQ4xL",
+          "name": "Gmail account - Zally"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Daily 02:00 AM Cron": {
+      "main": [[{ "node": "Check Public Site Health", "type": "main", "index": 0 }]]
+    },
+    "Check Public Site Health": {
+      "main": [
+        [
+          { "node": "Export Projects Tab", "type": "main", "index": 0 },
+          { "node": "Export Leads Tab", "type": "main", "index": 0 },
+          { "node": "Verify Status", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Verify Status": {
+      "main": [[{ "node": "If Unhealthy", "type": "main", "index": 0 }]]
+    },
+    "If Unhealthy": {
+      "main": [[{ "node": "Alert Owner of Outage", "type": "main", "index": 0 }]]
+    }
+  }
+}

@@ -1,0 +1,134 @@
+[
+  {
+    "serviceKey": "AI_AGENT",
+    "slug": "ai-agent-multi-agent-systems",
+    "title": "AI Agent & Multi-Agent Systems",
+    "summary": "Phát triển các hệ thống AI tự hành, điều phối nhiều agent chuyên biệt xử lý tác vụ phức tạp cho doanh nghiệp.",
+    "capabilities": [
+      "Requirement Analysis",
+      "LLM & Tool Integration",
+      "Guardrails & Fallback",
+      "Evaluation & Observability"
+    ],
+    "deliverables": [
+      "Working Autonomous Agent",
+      "Production Workflow Integration",
+      "System Documentation",
+      "Deployment & Handover"
+    ],
+    "iconKey": "bot",
+    "displayOrder": 1,
+    "active": true,
+    "updatedAt": "2026-09-22T14:21:26.020Z"
+  },
+  {
+    "serviceKey": "WORKFLOW_AUTOMATION",
+    "slug": "workflow-automation",
+    "title": "Workflow Automation",
+    "summary": "End-to-end automation for repetitive operational processes, cross-system sync, and automated reporting.",
+    "capabilities": [
+      "Process Mapping",
+      "n8n & Webhook Orchestration",
+      "API & Database Integration",
+      "Error Handling & Alerting"
+    ],
+    "deliverables": [
+      "Self-Hosted n8n Workflows",
+      "Operations Runbook",
+      "Automated Health Checks",
+      "Team Training"
+    ],
+    "iconKey": "workflow",
+    "displayOrder": 2,
+    "active": true,
+    "updatedAt": "2026-09-22T00:00:00Z"
+  },
+  {
+    "serviceKey": "DOCUMENT_AI_OCR",
+    "slug": "document-ai-ocr",
+    "title": "Document AI & OCR",
+    "summary": "High-accuracy text extraction, table parsing, and structured data extraction from invoices, contracts, and IDs.",
+    "capabilities": [
+      "Multi-Engine OCR (Paddle/Surya/Vision)",
+      "Document Classification",
+      "Structured Extraction & Schema Mapping",
+      "Human-in-the-Loop Review"
+    ],
+    "deliverables": [
+      "Automated Intake Pipeline",
+      "Validation Schema Engine",
+      "Verification UI Interface",
+      "Production API"
+    ],
+    "iconKey": "file-scan",
+    "displayOrder": 3,
+    "active": true,
+    "updatedAt": "2026-09-22T00:00:00Z"
+  },
+  {
+    "serviceKey": "ZALO_CUSTOMER_SERVICE",
+    "slug": "zalo-customer-service",
+    "title": "Zalo Bot & Customer Service",
+    "summary": "Official Zalo OA bots integrated with CRM, Google Sheets, or internal APIs to automate client inquiries 24/7.",
+    "capabilities": [
+      "Zalo OA Webhook Handling",
+      "Intent Recognition & FAQ Flow",
+      "CRM & Spreadsheet Sync",
+      "Human Agent Escalation"
+    ],
+    "deliverables": [
+      "Zalo Bot Workflow",
+      "Lead Routing Pipeline",
+      "Activity Audit Logs",
+      "Deployment Runbook"
+    ],
+    "iconKey": "message-square",
+    "displayOrder": 4,
+    "active": true,
+    "updatedAt": "2026-09-22T00:00:00Z"
+  },
+  {
+    "serviceKey": "CUSTOM_MANAGEMENT_SYSTEM",
+    "slug": "custom-management-system",
+    "title": "Custom Management System",
+    "summary": "Focused internal tools, admin portals, and data management systems for workflows that have outgrown spreadsheets.",
+    "capabilities": [
+      "Operational Architecture",
+      "Responsive Web Application",
+      "Real-time Dashboards & Reporting",
+      "Role-based Access & Audit Trails"
+    ],
+    "deliverables": [
+      "Custom Web Portal",
+      "Automated Data Pipeline",
+      "Dockerized Deployment",
+      "Administrator Guide"
+    ],
+    "iconKey": "layout-dashboard",
+    "displayOrder": 5,
+    "active": true,
+    "updatedAt": "2026-09-22T00:00:00Z"
+  },
+  {
+    "serviceKey": "AI_TRAINING",
+    "slug": "ai-training",
+    "title": "AI Training",
+    "summary": "Hands-on corporate training on AI automation, practical prompting, n8n workflows, and responsible AI adoption.",
+    "capabilities": [
+      "Curriculum Customization",
+      "Practical Hands-on Labs",
+      "Workplace Automation Projects",
+      "Post-training Evaluation"
+    ],
+    "deliverables": [
+      "Tailored Course Curriculum",
+      "Slide Decks & Code Repositories",
+      "Prompt & Workflow Cheatsheets",
+      "Student Follow-up Sessions"
+    ],
+    "iconKey": "graduation-cap",
+    "displayOrder": 6,
+    "active": true,
+    "updatedAt": "2026-09-22T00:00:00Z"
+  }
+]

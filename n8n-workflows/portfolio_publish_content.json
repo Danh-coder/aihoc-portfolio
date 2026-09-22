@@ -1,0 +1,300 @@
+{
+  "name": "portfolio_publish_content",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "portfolio/publish",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger-publish",
+      "name": "Webhook: Trigger Publish",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        160,
+        304
+      ],
+      "webhookId": "bce56510-b683-421c-aee5-d7ace1248e6a"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "id": "cron-check-ready",
+      "name": "Cron: Check Ready Projects",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        160,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Oh6nSGPoPT54wAPrvurTxGHt7gSzD8KK3L5v5XHtuKo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Projects",
+          "mode": "name"
+        },
+        "options": {},
+        "operation": "read"
+      },
+      "id": "read-projects",
+      "name": "Google Sheets: Read Projects",
+      "type": "n8n-nodes-base.googleSheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "PWP0jEt8UfzeWh3W",
+          "name": "Google Sheets account - Zally"
+        }
+      },
+      "typeVersion": 4.3,
+      "position": [
+        592,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Oh6nSGPoPT54wAPrvurTxGHt7gSzD8KK3L5v5XHtuKo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Services",
+          "mode": "name"
+        },
+        "options": {},
+        "operation": "read"
+      },
+      "id": "read-services",
+      "name": "Google Sheets: Read Services",
+      "type": "n8n-nodes-base.googleSheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "PWP0jEt8UfzeWh3W",
+          "name": "Google Sheets account - Zally"
+        }
+      },
+      "typeVersion": 4.3,
+      "position": [
+        784,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Oh6nSGPoPT54wAPrvurTxGHt7gSzD8KK3L5v5XHtuKo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "SiteConfig",
+          "mode": "name"
+        },
+        "options": {},
+        "operation": "read"
+      },
+      "id": "read-siteconfig",
+      "name": "Google Sheets: Read SiteConfig",
+      "type": "n8n-nodes-base.googleSheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "PWP0jEt8UfzeWh3W",
+          "name": "Google Sheets account - Zally"
+        }
+      },
+      "typeVersion": 4.3,
+      "position": [
+        992,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalization, Validation, and Privacy Transform\nconst projects = $items('Google Sheets: Read Projects').map(i => i.json);\nconst services = $items('Google Sheets: Read Services').map(i => i.json);\nconst configRows = $items('Google Sheets: Read SiteConfig').map(i => i.json);\n\nconst published = [];\nconst errors = [];\nconst seenSlugs = new Set();\nconst seenIds = new Set();\n\nfor (const prj of projects) {\n  if (!prj.Title && !prj.title) continue;\n  const prjStatus = (prj.status || prj.Status || 'PUBLISHED').toString().toUpperCase();\n  if (prjStatus !== 'PUBLISHED' && prjStatus !== 'READY_TO_PUBLISH' && prjStatus !== 'TRUE') continue;\n\n  const prjId = prj.project_id || prj.ID || ('PRJ-' + Math.random().toString(36).substring(2, 7).toUpperCase());\n  if (seenIds.has(prjId)) {\n    errors.push('Duplicate ID: ' + prjId);\n    continue;\n  }\n  seenIds.add(prjId);\n\n  const rawTitle = prj.title || prj.Title || 'Untitled Project';\n  const prjSlug = prj.slug || rawTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');\n  if (seenSlugs.has(prjSlug)) {\n    errors.push('Duplicate slug: ' + prjSlug);\n    continue;\n  }\n  seenSlugs.add(prjSlug);\n\n  const clientVis = (prj.client_visibility || 'PRIVATE').toString().toUpperCase();\n  const clientObj = (clientVis === 'PUBLIC' && prj.client_name) ? { name: prj.client_name } : null;\n\n  const techRaw = prj.technologies || prj.TechStack || '';\n  const techList = techRaw.split(/[|,]/).map(t => t.trim()).filter(Boolean);\n\n  const servRaw = prj.service_keys || prj.Category || 'AI_AGENT';\n  const servList = servRaw.split(/[|,]/).map(s => s.trim()).filter(Boolean);\n\n  published.push({\n    id: prjId,\n    slug: prjSlug,\n    title: rawTitle,\n    projectType: prj.project_type || 'PERSONAL',\n    client: clientObj,\n    serviceKeys: servList,\n    industry: prj.industry || prj.Category || 'Technology',\n    technologies: techList,\n    summary: prj.summary || prj.Description || '',\n    problemMarkdown: prj.problem || prj.Details || prj.Description || '',\n    solutionMarkdown: prj.solution || prj.Details || '',\n    roleMarkdown: prj.role || 'Lead AI Engineer',\n    implementationMarkdown: prj.implementation || null,\n    resultsMarkdown: prj.results || prj.Description || '',\n    resultHighlight: prj.result_highlight || null,\n    cover: {\n      src: prj.Image || ('/media/generated/' + prjId + '/cover.webp'),\n      width: 1600,\n      height: 900,\n      alt: prj.cover_alt || rawTitle\n    },\n    gallery: [],\n    links: {\n      demo: prj.demo_url || prj.LiveUrl || null,\n      repository: prj.repository_url || prj.GithubUrl || null,\n      paper: prj.paper_url || null\n    },\n    featuredRank: prj.featured_rank ? parseInt(prj.featured_rank, 10) : (prj.Featured === 'TRUE' || prj.Featured === true ? 1 : null),\n    publishedAt: prj.published_at || new Date().toISOString(),\n    updatedAt: prj.updated_at || new Date().toISOString()\n  });\n}\n\nconst publishedServices = [];\nfor (const s of services) {\n  if (!s.Title && !s.title) continue;\n  const sKey = s.service_key || s.ID || 'AI_AGENT';\n  const sTitle = s.title || s.Title || '';\n  const sSlug = s.slug || sTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');\n  publishedServices.push({\n    serviceKey: sKey,\n    slug: sSlug,\n    title: sTitle,\n    summary: s.summary || s.Description || '',\n    details: s.Details || s.details || '',\n    iconKey: s.icon_key || s.Icon || 'Bot',\n    displayOrder: parseInt(s.display_order || s.Order || '1', 10)\n  });\n}\n\nif (errors.length > 0) {\n  return [{ json: { success: false, errors } }];\n}\n\nreturn [{ json: { success: true, count: published.length, serviceCount: publishedServices.length, published, services: publishedServices } }];"
+      },
+      "id": "validate-normalize",
+      "name": "Validate & Normalize Snapshot",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1184,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Oh6nSGPoPT54wAPrvurTxGHt7gSzD8KK3L5v5XHtuKo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "PublishLog",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {}
+        },
+        "options": {}
+      },
+      "id": "publishlog-record-success",
+      "name": "PublishLog: Append Log",
+      "type": "n8n-nodes-base.googleSheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "PWP0jEt8UfzeWh3W",
+          "name": "Google Sheets account - Zally"
+        }
+      },
+      "typeVersion": 4.3,
+      "position": [
+        1560,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($('Validate & Normalize Snapshot').item.json) }}",
+        "options": {}
+      },
+      "id": "respond-publish-success",
+      "name": "Respond: Publish Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const normResult = $input.item.json;\nconst now = new Date().toISOString();\nconst publishId = 'PUB-' + Date.now().toString(36).toUpperCase();\n\nreturn [{\n  json: {\n    publish_id: publishId,\n    started_at: now,\n    completed_at: now,\n    trigger_type: 'MANUAL',\n    requested_project_id: '',\n    snapshot_version: now.slice(0, 10).replace(/-/g, '') + '_v1',\n    project_count: normResult.count || 0,\n    media_count: normResult.count || 0,\n    status: normResult.success ? 'SUCCESS' : 'FAILED',\n    error_code: normResult.success ? '' : 'VALIDATION_FAILED',\n    error_summary: normResult.errors ? normResult.errors.join('; ') : '',\n    correlation_id: 'CID-' + Date.now()\n  }\n}];"
+      },
+      "id": "format-publish-log",
+      "name": "Format Publish Log",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1360,
+        380
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook: Trigger Publish": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets: Read Projects",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cron: Check Ready Projects": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets: Read Projects",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets: Read Projects": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets: Read Services",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets: Read Services": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets: Read SiteConfig",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets: Read SiteConfig": {
+      "main": [
+        [
+          {
+            "node": "Validate & Normalize Snapshot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate & Normalize Snapshot": {
+      "main": [
+        [
+          {
+            "node": "Format Publish Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Publish Log": {
+      "main": [
+        [
+          {
+            "node": "PublishLog: Append Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PublishLog: Append Log": {
+      "main": [
+        [
+          {
+            "node": "Respond: Publish Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

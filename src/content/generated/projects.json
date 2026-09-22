@@ -1,0 +1,456 @@
+[
+  {
+    "id": "PRJ-AGENT-01",
+    "slug": "enterprise-agentic-rag-platform",
+    "title": "Enterprise Agentic RAG Platform",
+    "projectType": "PERSONAL",
+    "client": null,
+    "serviceKeys": [
+      "AI_AGENT"
+    ],
+    "industry": "AI_AGENT",
+    "technologies": [
+      "LangGraph",
+      "FastAPI",
+      "pgvector",
+      "Next.js",
+      "Docker"
+    ],
+    "summary": "Hệ thống AI Agent tự động hóa tra cứu dữ liệu quy chế và phân tích báo cáo tài chính cho doanh nghiệp.",
+    "problemMarkdown": "Xây dựng trên nền tảng LangGraph kết hợp Hybrid Search (pgvector + BM25). Tối ưu hóa thời gian xử lý hồ sơ từ 3 ngày xuống dưới 4 phút với độ chính xác trích xuất đạt 96.8%.",
+    "solutionMarkdown": "Xây dựng trên nền tảng LangGraph kết hợp Hybrid Search (pgvector + BM25). Tối ưu hóa thời gian xử lý hồ sơ từ 3 ngày xuống dưới 4 phút với độ chính xác trích xuất đạt 96.8%.",
+    "roleMarkdown": "Lead AI Engineer",
+    "implementationMarkdown": null,
+    "resultsMarkdown": "Hệ thống AI Agent tự động hóa tra cứu dữ liệu quy chế và phân tích báo cáo tài chính cho doanh nghiệp.",
+    "resultHighlight": null,
+    "cover": {
+      "src": "https://images.unsplash.com/photo-1677442136019-21780efad99a?w=1600&h=900&fit=crop",
+      "width": 1600,
+      "height": 900,
+      "alt": "Enterprise Agentic RAG Platform"
+    },
+    "gallery": [],
+    "links": {
+      "demo": "https://portfolio.aihoc.ai.vn",
+      "repository": "https://github.com/danhphan",
+      "paper": null
+    },
+    "featuredRank": 1,
+    "publishedAt": "2026-09-22T14:21:24.573Z",
+    "updatedAt": "2026-09-22T14:21:24.573Z"
+  },
+  {
+    "id": "PRJ-0001",
+    "slug": "agricultural-land-production-management",
+    "title": "Agricultural Land & Crop Production Management System",
+    "projectType": "CLIENT",
+    "client": null,
+    "serviceKeys": [
+      "CUSTOM_MANAGEMENT_SYSTEM",
+      "WORKFLOW_AUTOMATION"
+    ],
+    "industry": "Agriculture",
+    "technologies": [
+      "Next.js",
+      "FastAPI",
+      "PostgreSQL",
+      "n8n",
+      "Docker"
+    ],
+    "summary": "Integrated web platform replacing fragmented spreadsheets with real-time plot mapping, crop cycle tracking, and automated harvest reporting.",
+    "problemMarkdown": "A regional farming cooperative managing over 120 hectares across multiple districts struggled with disjointed Excel files for tracking fertilizer schedules, crop life-cycles, and harvest outputs. Data delays led to chemical misallocations and delayed delivery schedules.",
+    "solutionMarkdown": "Designed and deployed a responsive management portal allowing field supervisors to log plot conditions, soil metrics, and treatments via mobile-friendly forms, while management receives real-time production analytics and automated weekly export summaries.",
+    "roleMarkdown": "Lead Full-Stack Architect: Conducted operational discovery with cooperative managers, designed relational schema, implemented the backend API, and built automated reporting pipelines.",
+    "implementationMarkdown": "Constructed a modular micro-service with FastAPI and Next.js, orchestrated with Docker Compose on self-hosted infrastructure. Integrated automated n8n workflows for daily data verification and scheduled Telegram alert digests for plot anomalies.",
+    "resultsMarkdown": "Eliminated 100% of spreadsheet version conflicts, reduced weekly reporting turnaround from 14 hours to under 15 minutes, and saved an estimated 12% in seasonal fertilizer wastage.",
+    "resultHighlight": "85% reduction in reporting turnaround",
+    "cover": {
+      "src": "/media/generated/PRJ-0001/cover.webp",
+      "width": 1600,
+      "height": 900,
+      "alt": "Dashboard view of Agricultural Land Management system displaying plot metrics"
+    },
+    "gallery": [
+      {
+        "src": "/media/generated/PRJ-0001/gallery-01.webp",
+        "width": 1600,
+        "height": 900,
+        "alt": "Field supervisor mobile inspection interface",
+        "caption": "Mobile-optimized plot logging screen"
+      }
+    ],
+    "links": {
+      "demo": null,
+      "repository": null,
+      "paper": null
+    },
+    "featuredRank": 1,
+    "publishedAt": "2026-09-20T08:00:00Z",
+    "updatedAt": "2026-09-20T08:00:00Z"
+  },
+  {
+    "id": "PRJ-0002",
+    "slug": "hr-employment-document-automation",
+    "title": "Automated HR Employment Document Processing Pipeline",
+    "projectType": "CLIENT",
+    "client": null,
+    "serviceKeys": [
+      "DOCUMENT_AI_OCR",
+      "WORKFLOW_AUTOMATION"
+    ],
+    "industry": "Human Resources",
+    "technologies": [
+      "Python",
+      "PaddleOCR",
+      "LangChain",
+      "n8n",
+      "Google Workspace"
+    ],
+    "summary": "AI-assisted intake pipeline that extracts, validates, and archives candidate employment records and contracts with 98% accuracy.",
+    "problemMarkdown": "An HR department onboarding 200+ seasonal employees monthly spent over 40 hours per week manually transcribing citizen IDs, health certificates, and contracts into HRMS spreadsheets, suffering from frequent typographical errors.",
+    "solutionMarkdown": "Engineered an intelligent document intake pipeline with automated OCR preprocessing, LLM schema extraction, and human-in-the-loop review for low-confidence fields.",
+    "roleMarkdown": "AI Automation Engineer: Implemented OCR image rectification, custom extraction prompts, webhook connectors, and validation rules.",
+    "implementationMarkdown": "Built an n8n processing pipeline that watches secure cloud intake folders, triggers OCR inference on GPU-enabled workers, normalizes Vietnamese accents and national ID numbers, and flags ambiguous records for human verification.",
+    "resultsMarkdown": "Reduced candidate intake processing time from 25 minutes per applicant to 45 seconds, with an overall extraction accuracy exceeding 98.4% across 1,500+ processed documents.",
+    "resultHighlight": "97% faster onboarding intake",
+    "cover": {
+      "src": "/media/generated/PRJ-0002/cover.webp",
+      "width": 1600,
+      "height": 900,
+      "alt": "OCR pipeline dashboard showing document verification stages"
+    },
+    "gallery": [],
+    "links": {
+      "demo": null,
+      "repository": null,
+      "paper": null
+    },
+    "featuredRank": 2,
+    "publishedAt": "2026-09-18T10:30:00Z",
+    "updatedAt": "2026-09-18T10:30:00Z"
+  },
+  {
+    "id": "PRJ-0003",
+    "slug": "pab-university-portal-automation",
+    "title": "PAB University Academic Portal & Grade Audit Automation",
+    "projectType": "CLIENT",
+    "client": null,
+    "serviceKeys": [
+      "WORKFLOW_AUTOMATION",
+      "CUSTOM_MANAGEMENT_SYSTEM"
+    ],
+    "industry": "Education",
+    "technologies": [
+      "Python",
+      "Playwright",
+      "n8n",
+      "PostgreSQL",
+      "FastAPI"
+    ],
+    "summary": "Headless browser automation and verification engine synchronizing academic transcripts and cross-faculty grade submissions.",
+    "problemMarkdown": "Academic advisors faced severe bottlenecks during end-of-semester grade reconciliation due to legacy student portal limitations and manual copy-pasting of multi-department course records.",
+    "solutionMarkdown": "Developed an audited, idempotent RPA automation script running in isolated headless containers that extracts transcripts, reconciles discrepancies against faculty submission sheets, and generates audit reports.",
+    "roleMarkdown": "Automation Architect: Created resilient headless browser scripts with session handling, error backoff, and cryptographic audit trails.",
+    "implementationMarkdown": "Combined Playwright browser automation with n8n workflow triggers. Built reconciliation algorithms that detect grading anomalies and mismatching credit counts before committing final data.",
+    "resultsMarkdown": "Processed 4,200 student grade files in under 2 hours without a single transcription error, cutting faculty overtime by 90% during grading periods.",
+    "resultHighlight": "4,200 transcripts audited in 2 hours",
+    "cover": {
+      "src": "/media/generated/PRJ-0003/cover.webp",
+      "width": 1600,
+      "height": 900,
+      "alt": "Audit report dashboard of academic reconciliation workflow"
+    },
+    "gallery": [],
+    "links": {
+      "demo": null,
+      "repository": null,
+      "paper": null
+    },
+    "featuredRank": 3,
+    "publishedAt": "2026-09-15T09:00:00Z",
+    "updatedAt": "2026-09-15T09:00:00Z"
+  },
+  {
+    "id": "PRJ-0004",
+    "slug": "zalo-medical-appointment-bot",
+    "title": "Zalo Medical Consultation & Appointment Booking Bot",
+    "projectType": "CLIENT",
+    "client": null,
+    "serviceKeys": [
+      "ZALO_CUSTOMER_SERVICE",
+      "AI_AGENT"
+    ],
+    "industry": "Healthcare",
+    "technologies": [
+      "Zalo OA API",
+      "n8n",
+      "OpenAI GPT-4o-mini",
+      "Google Calendar"
+    ],
+    "summary": "24/7 intelligent patient assistance bot on Zalo OA triaging clinic inquiries, scheduling doctor appointments, and sending appointment reminders.",
+    "problemMarkdown": "A dental and cosmetic clinic experienced high abandonment rates on customer inquiries outside clinic working hours (6 PM - 8 AM), resulting in lost consultations and high front-desk phone congestion during peak mornings.",
+    "solutionMarkdown": "Built an intelligent Zalo Official Account chatbot with natural language understanding to answer common treatment FAQs, verify doctor availability in real-time, and confirm bookings directly into clinic schedules.",
+    "roleMarkdown": "Conversational AI Developer: Configured Zalo OA webhooks, authored prompt safety guardrails, built intent classification nodes, and integrated booking calendar APIs.",
+    "implementationMarkdown": "Designed an n8n webhook listener that processes incoming Zalo messages, uses an LLM with strict clinic knowledge grounding for FAQs, and transitions seamlessly to structured booking workflows.",
+    "resultsMarkdown": "Handled 1,800+ patient inquiries in the first 60 days with 0 medical hallucinations, increasing off-hour booking conversions by 42% and eliminating receptionist phone queueing.",
+    "resultHighlight": "+42% off-hours appointment bookings",
+    "cover": {
+      "src": "/media/generated/PRJ-0004/cover.webp",
+      "width": 1600,
+      "height": 900,
+      "alt": "Zalo medical consultation bot workflow overview"
+    },
+    "gallery": [],
+    "links": {
+      "demo": null,
+      "repository": null,
+      "paper": null
+    },
+    "featuredRank": 4,
+    "publishedAt": "2026-09-10T14:00:00Z",
+    "updatedAt": "2026-09-10T14:00:00Z"
+  },
+  {
+    "id": "PRJ-0005",
+    "slug": "ai-multilingual-newspaper-reader",
+    "title": "Autonomous Multilingual Research & News Digest Agent",
+    "projectType": "PERSONAL",
+    "client": null,
+    "serviceKeys": [
+      "AI_AGENT",
+      "WORKFLOW_AUTOMATION"
+    ],
+    "industry": "Research",
+    "technologies": [
+      "Python",
+      "LangGraph",
+      "FastAPI",
+      "Whisper",
+      "TTS"
+    ],
+    "summary": "Autonomous AI agent that crawls, synthesizes, and generates audio podcast digests from global technology publications every morning.",
+    "problemMarkdown": "Information overload across academic preprint servers and international technology news made it impossible for busy developers and researchers to stay up to date with relevant breakthroughs.",
+    "solutionMarkdown": "Created an end-to-end pipeline that crawls selected RSS and research portals, evaluates paper significance, writes concise bullet summaries in Vietnamese and English, and produces synthetic speech audio digests.",
+    "roleMarkdown": "Solo Developer & Creator: Designed agentic crawler with LangGraph, implemented content scoring heuristics, and deployed automated morning audio delivery.",
+    "implementationMarkdown": "The workflow runs every morning at 6:00 AM via scheduled cron, deduplicates articles via vector embeddings, filters key insights using Claude 3.5 Sonnet, and renders clean audio files via local TTS.",
+    "resultsMarkdown": "Delivered 120+ consecutive daily audio editions without failure, condensing 3 hours of daily reading into an actionable 10-minute briefing.",
+    "resultHighlight": "120+ consecutive automated daily digests",
+    "cover": {
+      "src": "/media/generated/PRJ-0005/cover.webp",
+      "width": 1600,
+      "height": 900,
+      "alt": "AI Newspaper Digest architecture and podcast generation"
+    },
+    "gallery": [],
+    "links": {
+      "demo": "https://example.com/demo",
+      "repository": "https://github.com/danhphan/ai-newspaper-agent",
+      "paper": null
+    },
+    "featuredRank": 5,
+    "publishedAt": "2026-09-05T07:00:00Z",
+    "updatedAt": "2026-09-05T07:00:00Z"
+  },
+  {
+    "id": "PRJ-0006",
+    "slug": "education-center-lead-booking-workflow",
+    "title": "Vocational Center Omnichannel Lead Routing & Consultation Workflow",
+    "projectType": "CLIENT",
+    "client": null,
+    "serviceKeys": [
+      "WORKFLOW_AUTOMATION",
+      "ZALO_CUSTOMER_SERVICE"
+    ],
+    "industry": "Education",
+    "technologies": [
+      "n8n",
+      "Zalo OA",
+      "Google Sheets",
+      "Telegram Bot API"
+    ],
+    "summary": "Unified lead capture workflow connecting Facebook Ads, website landing pages, and Zalo OA directly to admissions counselors.",
+    "problemMarkdown": "A specialized training academy lost up to 30% of advertising leads due to response latency averaging 4 hours across siloed communication channels.",
+    "solutionMarkdown": "Engineered a unified n8n automation pipeline that captures leads instantaneously from web forms, Facebook webhook events, and Zalo inquiries, deduplicating them and alerting the on-duty counselor on Telegram within 10 seconds.",
+    "roleMarkdown": "Systems Integration Engineer: Unified disparate webhook formats, designed round-robin counselor assignment, and built instant notification dispatchers.",
+    "implementationMarkdown": "Consolidated webhook payloads, validated phone numbers with Vietnamese regex patterns, synced rows to Google Sheets, and dispatched interactive Telegram notifications with one-click call buttons.",
+    "resultsMarkdown": "Reduced average first-response time from 4.2 hours to under 3 minutes, boosting enrollment consultation conversion by 28%.",
+    "resultHighlight": "First response in under 3 minutes",
+    "cover": {
+      "src": "/media/generated/PRJ-0006/cover.webp",
+      "width": 1600,
+      "height": 900,
+      "alt": "Omnichannel lead routing workflow and notifications"
+    },
+    "gallery": [],
+    "links": {
+      "demo": null,
+      "repository": null,
+      "paper": null
+    },
+    "featuredRank": 6,
+    "publishedAt": "2026-08-28T11:00:00Z",
+    "updatedAt": "2026-08-28T11:00:00Z"
+  },
+  {
+    "id": "PRJ-0007",
+    "slug": "medical-device-lead-qualification-agent",
+    "title": "B2B Medical Device Distribution Lead Qualification Engine",
+    "projectType": "CLIENT",
+    "client": null,
+    "serviceKeys": [
+      "AI_AGENT",
+      "WORKFLOW_AUTOMATION"
+    ],
+    "industry": "Healthcare",
+    "technologies": [
+      "Python",
+      "FastAPI",
+      "OpenAI",
+      "PostgreSQL",
+      "n8n"
+    ],
+    "summary": "Intelligent qualification agent assessing clinic purchasing criteria, license verification, and equipment requirements for sales reps.",
+    "problemMarkdown": "Medical equipment distributors received high volumes of non-qualified quote requests, distracting technical sales specialists with inquiries from unregistered practices or students seeking project quotes.",
+    "solutionMarkdown": "Implemented an AI qualification system that ingests inquiry emails and RFQ forms, checks business registration databases, classifies purchasing urgency and facility capabilities, and generates a pre-qualification briefing sheet for account managers.",
+    "roleMarkdown": "AI Solutions Developer: Designed qualification scoring rubric, built data enrichment scripts, and integrated CRM pipeline stages.",
+    "implementationMarkdown": "Developed an n8n workflow orchestrated with a dedicated FastAPI microservice that extracts clinical requirements, parses attached PDF specifications, and computes a qualification score from 0 to 100.",
+    "resultsMarkdown": "Filtered out 65% of unqualified inquiries before sales specialist review, increasing qualified opportunity win rates by 22%.",
+    "resultHighlight": "65% noise reduction for sales team",
+    "cover": {
+      "src": "/media/generated/PRJ-0007/cover.webp",
+      "width": 1600,
+      "height": 900,
+      "alt": "B2B Medical Device Qualification Engine architecture"
+    },
+    "gallery": [],
+    "links": {
+      "demo": null,
+      "repository": null,
+      "paper": null
+    },
+    "featuredRank": null,
+    "publishedAt": "2026-08-20T15:00:00Z",
+    "updatedAt": "2026-08-20T15:00:00Z"
+  },
+  {
+    "id": "PRJ-0008",
+    "slug": "low-latency-asr-tts-inference-pipeline",
+    "title": "Low-Latency Vietnamese Speech Recognition & Synthesis Pipeline",
+    "projectType": "PERSONAL",
+    "client": null,
+    "serviceKeys": [
+      "AI_AGENT"
+    ],
+    "industry": "Internal Operations",
+    "technologies": [
+      "Faster-Whisper",
+      "VITS",
+      "FastAPI",
+      "Docker",
+      "ONNX Runtime"
+    ],
+    "summary": "Self-hosted speech inference cluster optimized for real-time Vietnamese transcription and expressive neural voice generation.",
+    "problemMarkdown": "Commercial speech APIs imposed high recurring token costs and unacceptable round-trip latency (>1,200ms) for voice interaction prototypes, making real-time voice conversations clunky.",
+    "solutionMarkdown": "Built an optimized on-premise inference pipeline utilizing Faster-Whisper with INT8 quantization for ASR and lightweight VITS models for Vietnamese speech synthesis, achieving sub-350ms streaming latency.",
+    "roleMarkdown": "Machine Learning Engineer: Benchmarked model architectures, converted weights to ONNX/TensorRT, and built streaming WebSocket server.",
+    "implementationMarkdown": "Engineered asynchronous FastAPI WebSocket endpoints managing streaming audio buffers, Voice Activity Detection (VAD), and token-by-token synthesis piping.",
+    "resultsMarkdown": "Achieved sub-350ms end-to-end voice latency on a single consumer GPU while saving $400/month in cloud transcription costs.",
+    "resultHighlight": "<350ms end-to-end voice latency",
+    "cover": {
+      "src": "/media/generated/PRJ-0008/cover.webp",
+      "width": 1600,
+      "height": 900,
+      "alt": "Real-time speech inference pipeline audio waveform visualizer"
+    },
+    "gallery": [],
+    "links": {
+      "demo": null,
+      "repository": "https://github.com/danhphan/low-latency-speech-pipeline",
+      "paper": null
+    },
+    "featuredRank": null,
+    "publishedAt": "2026-08-10T10:00:00Z",
+    "updatedAt": "2026-08-10T10:00:00Z"
+  },
+  {
+    "id": "PRJ-0009",
+    "slug": "stem-interactive-simulation-platform",
+    "title": "Interactive STEM Physics Simulation & Virtual Laboratory",
+    "projectType": "PERSONAL",
+    "client": null,
+    "serviceKeys": [
+      "CUSTOM_MANAGEMENT_SYSTEM",
+      "AI_TRAINING"
+    ],
+    "industry": "Education",
+    "technologies": [
+      "Next.js",
+      "Canvas API",
+      "TypeScript",
+      "Tailwind CSS"
+    ],
+    "summary": "Web-based interactive physics experiments allowing high school students to visualize mechanics, electromagnetic fields, and wave phenomena.",
+    "problemMarkdown": "Schools lacking equipped laboratory hardware struggle to provide students with tangible, hands-on physics experimentation, resulting in lower conceptual comprehension and test performance.",
+    "solutionMarkdown": "Created an interactive browser simulation platform where students manipulate physical constants (gravity, friction, magnetic flux) in real time with continuous parameter graphs and dynamic hints.",
+    "roleMarkdown": "Full-Stack Developer: Modeled numerical physics engines in TypeScript, built responsive Canvas visualizations, and implemented student exercise progress tracking.",
+    "implementationMarkdown": "Utilized Verlet numerical integration for stable multi-body physics calculations, coupled with high-performance 2D Canvas rendering that runs at a consistent 60fps even on low-powered mobile devices.",
+    "resultsMarkdown": "Adopted by over 500 students in pilot testing with an 88% positive engagement rating and noticeable improvements in kinematics quiz scores.",
+    "resultHighlight": "60fps real-time physics on mobile",
+    "cover": {
+      "src": "/media/generated/PRJ-0009/cover.webp",
+      "width": 1600,
+      "height": 900,
+      "alt": "STEM simulation interactive physics workbench interface"
+    },
+    "gallery": [],
+    "links": {
+      "demo": "https://example.com/stem-demo",
+      "repository": "https://github.com/danhphan/stem-simulation",
+      "paper": null
+    },
+    "featuredRank": null,
+    "publishedAt": "2026-07-25T13:00:00Z",
+    "updatedAt": "2026-07-25T13:00:00Z"
+  },
+  {
+    "id": "PRJ-0010",
+    "slug": "autonomous-rc-iot-robotics-platform",
+    "title": "Autonomous RC Vehicle with Edge Computer Vision & Telemetry",
+    "projectType": "PERSONAL",
+    "client": null,
+    "serviceKeys": [
+      "AI_AGENT",
+      "CUSTOM_MANAGEMENT_SYSTEM"
+    ],
+    "industry": "Research",
+    "technologies": [
+      "Raspberry Pi",
+      "OpenCV",
+      "PyTorch",
+      "WebRTC",
+      "MQTT"
+    ],
+    "summary": "Edge-computed autonomous 1/10th scale rover equipped with lane-following vision, obstacle avoidance, and real-time WebRTC video streaming.",
+    "problemMarkdown": "Developing robust edge robotics algorithms on resource-constrained micro-computers requires tight synchronization between high-speed camera sensors, motor microcontrollers, and wireless control protocols.",
+    "solutionMarkdown": "Built a modular autonomous rover platform featuring Raspberry Pi edge inference, lightweight CNN models for lane tracking, ultrasonic depth arrays for failsafe stopping, and low-latency WebRTC teleoperation.",
+    "roleMarkdown": "Robotics & Embedded AI Engineer: Built hardware wiring harness, trained perception neural network, and wrote real-time telemetry dashboard.",
+    "implementationMarkdown": "Trained a quantized MobileNet backbone to predict steering angles directly from monocular video frames, communicating with motor controllers via PWM over I2C at 50Hz update rates.",
+    "resultsMarkdown": "Achieved continuous autonomous track navigation at speeds up to 18 km/h with sub-80ms control loop latency.",
+    "resultHighlight": "Autonomous navigation at 18 km/h",
+    "cover": {
+      "src": "/media/generated/PRJ-0010/cover.webp",
+      "width": 1600,
+      "height": 900,
+      "alt": "Autonomous RC rover hardware and telemetry dashboard"
+    },
+    "gallery": [],
+    "links": {
+      "demo": null,
+      "repository": "https://github.com/danhphan/autonomous-rc-iot",
+      "paper": null
+    },
+    "featuredRank": null,
+    "publishedAt": "2026-07-10T16:00:00Z",
+    "updatedAt": "2026-07-10T16:00:00Z"
+  }
+]

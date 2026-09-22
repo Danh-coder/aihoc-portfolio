@@ -1,0 +1,205 @@
+{
+  "name": "portfolio_retry_notifications",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "id": "schedule-15min",
+      "name": "Schedule: Every 15 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        192,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Oh6nSGPoPT54wAPrvurTxGHt7gSzD8KK3L5v5XHtuKo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "read-leads",
+      "name": "Read Leads",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.3,
+      "position": [
+        400,
+        288
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "PWP0jEt8UfzeWh3W",
+          "name": "Google Sheets account - Zally"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filter rows where owner_notification_status is PENDING or FAILED\nconst leads = $items('Read Leads');\nconst toRetry = [];\n\nfor (const item of leads) {\n  const row = item.json;\n  if (row.owner_notification_status === 'PENDING' || row.owner_notification_status === 'FAILED') {\n    toRetry.push({ json: row });\n  }\n}\n\nreturn toRetry;"
+      },
+      "id": "filter-unsent",
+      "name": "Filter Unsent Leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        624,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "zally.aihoc@gmail.com",
+        "subject": "=⚠️ [RETRY] Portfolio Inquiry – {{ $json.service_key }} from {{ $json.full_name }}",
+        "message": "=<h2>⚠️ Retry: Undelivered Inquiry Notification</h2>\n<p style=\"color:#856404;background:#fff3cd;padding:10px;border-radius:4px\">This inquiry notification was not delivered on first attempt and is being retried.</p>\n<table style=\"border-collapse:collapse;width:100%;font-family:sans-serif;font-size:14px\">\n  <tr><td style=\"padding:8px;background:#f5f5f5;font-weight:bold;width:160px\">Lead ID</td><td style=\"padding:8px;font-family:monospace\">{{ $json.lead_id }}</td></tr>\n  <tr><td style=\"padding:8px;background:#f5f5f5;font-weight:bold\">Name</td><td style=\"padding:8px\">{{ $json.full_name }}</td></tr>\n  <tr><td style=\"padding:8px;background:#f5f5f5;font-weight:bold\">Email</td><td style=\"padding:8px\"><a href=\"mailto:{{ $json.email }}\">{{ $json.email }}</a></td></tr>\n  <tr><td style=\"padding:8px;background:#f5f5f5;font-weight:bold\">Service</td><td style=\"padding:8px\">{{ $json.service_key }}</td></tr>\n  <tr><td style=\"padding:8px;background:#f5f5f5;font-weight:bold\">Submitted At</td><td style=\"padding:8px\">{{ $json.created_at }}</td></tr>\n</table>\n<h3 style=\"margin-top:20px\">Requirement</h3>\n<blockquote style=\"border-left:4px solid #f0ad4e;padding:12px 16px;background:#fffdf0;margin:0;font-style:italic\">{{ $json.requirement }}</blockquote>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "retry-gmail",
+      "name": "Retry: Send Gmail Notification",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        848,
+        288
+      ],
+      "webhookId": "74d98709-0b3c-4061-9c53-c35d92510dc6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "6Zb7F76fYWjiQ4xL",
+          "name": "Gmail account - Zally"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1Oh6nSGPoPT54wAPrvurTxGHt7gSzD8KK3L5v5XHtuKo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "lead_id"
+          ],
+          "value": {
+            "lead_id": "={{ $json.lead_id }}",
+            "owner_notification_status": "SENT"
+          }
+        },
+        "options": {}
+      },
+      "id": "mark-sent",
+      "name": "Mark SENT in Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.3,
+      "position": [
+        1200,
+        288
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "PWP0jEt8UfzeWh3W",
+          "name": "Google Sheets account - Zally"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Combine filtered lead ID with SENT status\nconst unsent = $items('Filter Unsent Leads');\nreturn unsent.map(item => ({\n  json: {\n    lead_id: item.json.lead_id,\n    owner_notification_status: 'SENT'\n  }\n}));"
+      },
+      "id": "prepare-update-lead",
+      "name": "Prepare Lead for Update",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1024,
+        288
+      ]
+    }
+  ],
+  "connections": {
+    "Schedule: Every 15 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Read Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Leads": {
+      "main": [
+        [
+          {
+            "node": "Filter Unsent Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Unsent Leads": {
+      "main": [
+        [
+          {
+            "node": "Retry: Send Gmail Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Retry: Send Gmail Notification": {
+      "main": [
+        [
+          {
+            "node": "Prepare Lead for Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Lead for Update": {
+      "main": [
+        [
+          {
+            "node": "Mark SENT in Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
