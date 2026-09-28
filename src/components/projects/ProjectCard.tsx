@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Project } from "@/types/content";
 import { Badge } from "@/components/ui/Badge";
-import { ArrowUpRight, TrendingUp } from "lucide-react";
+import { ArrowUpRight, TrendingUp, Play } from "lucide-react";
 
 interface ProjectCardProps {
   project: Project;
@@ -38,6 +38,16 @@ export function ProjectCard({ project }: ProjectCardProps) {
             {project.projectType}
           </Badge>
         </div>
+
+        {/* Video demo badge if available */}
+        {project.videoUrl && (
+          <div className="absolute top-3 right-3">
+            <span className="inline-flex items-center text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-900/80 text-white backdrop-blur-sm shadow-sm">
+              <Play className="w-3 h-3 mr-1 fill-white" />
+              Video Demo
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Content Body */}

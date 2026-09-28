@@ -20,6 +20,7 @@ import {
   FileText,
   TrendingUp,
   CheckCircle,
+  Play,
 } from "lucide-react";
 
 interface ProjectDetailProps {
@@ -149,6 +150,44 @@ export default function ProjectDetailPage({ params }: ProjectDetailProps) {
           </div>
         )}
       </div>
+
+      {/* 3.1 DEMO VIDEO PLAYER (IF AVAILABLE) */}
+      {project.videoUrl && (
+        <section className="space-y-4" aria-labelledby="video-walkthrough-heading">
+          <div className="flex items-center justify-between">
+            <h2 id="video-walkthrough-heading" className="text-xl sm:text-2xl font-bold text-text flex items-center">
+              <Play className="w-5 h-5 mr-2 text-primary fill-primary" />
+              Project Demo &amp; Production Walkthrough
+            </h2>
+            <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-semibold border border-emerald-200">
+              Live Video Recording
+            </span>
+          </div>
+
+          <div className="relative aspect-video w-full rounded-lg overflow-hidden border border-slate-700 bg-slate-950 shadow-xl">
+            {project.videoUrl.includes("drive.google.com") ||
+            project.videoUrl.includes("youtube.com") ||
+            project.videoUrl.includes("youtu.be") ? (
+              <iframe
+                src={project.videoUrl}
+                className="w-full h-full border-0"
+                allow="autoplay; encrypted-media; fullscreen"
+                allowFullScreen
+                title={`${project.title} Video Demonstration`}
+              />
+            ) : (
+              <video
+                src={project.videoUrl}
+                controls
+                className="w-full h-full object-contain"
+                poster={project.cover?.src}
+              >
+                Your browser does not support HTML5 video playback.
+              </video>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* 4. QUICK FACTS GRID */}
       <section className="bg-surface rounded-md border border-border p-6 shadow-sm" aria-labelledby="quick-facts-heading">

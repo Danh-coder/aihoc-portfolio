@@ -44,6 +44,7 @@ export const ProjectSchema = z.object({
   cover: ProjectMediaSchema,
   gallery: z.array(ProjectMediaSchema).default([]),
   links: ProjectLinksSchema.default({}),
+  videoUrl: z.string().nullable().optional(),
   featuredRank: z.number().int().min(1).max(99).nullable().optional(),
   publishedAt: z.string(),
   updatedAt: z.string(),

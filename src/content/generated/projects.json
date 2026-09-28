@@ -24,12 +24,20 @@
     "resultsMarkdown": "Hệ thống AI Agent tự động hóa tra cứu dữ liệu quy chế và phân tích báo cáo tài chính cho doanh nghiệp.",
     "resultHighlight": null,
     "cover": {
-      "src": "https://images.unsplash.com/photo-1677442136019-21780efad99a?w=1600&h=900&fit=crop",
+      "src": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&h=900&fit=crop",
       "width": 1600,
       "height": 900,
       "alt": "Enterprise Agentic RAG Platform"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Enterprise Agentic RAG Platform - Showcase",
+        "caption": "Enterprise Agentic RAG Platform Architecture & System Interface"
+      }
+    ],
     "links": {
       "demo": "https://portfolio.aihoc.ai.vn",
       "repository": "https://github.com/danhphan",
@@ -37,7 +45,8 @@
     },
     "featuredRank": 1,
     "publishedAt": "2026-09-25T16:39:24.400Z",
-    "updatedAt": "2026-09-25T16:39:24.400Z"
+    "updatedAt": "2026-09-25T16:39:24.400Z",
+    "videoUrl": "https://drive.google.com/file/d/1J22aVAFLuu1G53QiySD092hT3nRxXXpn/preview"
   },
   {
     "id": "PRJ-0001",
@@ -65,18 +74,18 @@
     "resultsMarkdown": "Eliminated 100% of spreadsheet version conflicts, reduced weekly reporting turnaround from 14 hours to under 15 minutes, and saved an estimated 12% in seasonal fertilizer wastage.",
     "resultHighlight": "85% reduction in reporting turnaround",
     "cover": {
-      "src": "/media/generated/PRJ-0001/cover.webp",
+      "src": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&h=900&fit=crop",
       "width": 1600,
       "height": 900,
-      "alt": "Dashboard view of Agricultural Land Management system displaying plot metrics"
+      "alt": "Agricultural Land & Crop Production Management System"
     },
     "gallery": [
       {
-        "src": "/media/generated/PRJ-0001/gallery-01.webp",
+        "src": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&h=900&fit=crop",
         "width": 1600,
         "height": 900,
-        "alt": "Field supervisor mobile inspection interface",
-        "caption": "Mobile-optimized plot logging screen"
+        "alt": "Agricultural Land & Crop Production Management System - Showcase",
+        "caption": "Agricultural Land & Crop Production Management System Architecture & System Interface"
       }
     ],
     "links": {
@@ -86,7 +95,8 @@
     },
     "featuredRank": 1,
     "publishedAt": "2026-09-20T08:00:00Z",
-    "updatedAt": "2026-09-20T08:00:00Z"
+    "updatedAt": "2026-09-20T08:00:00Z",
+    "videoUrl": "https://drive.google.com/file/d/1HvfyIiiXKTT_kEftMiLHmnlzEVMziPaQ/preview"
   },
   {
     "id": "PRJ-0002",
@@ -114,12 +124,20 @@
     "resultsMarkdown": "Reduced candidate intake processing time from 25 minutes per applicant to 45 seconds, with an overall extraction accuracy exceeding 98.4% across 1,500+ processed documents.",
     "resultHighlight": "97% faster onboarding intake",
     "cover": {
-      "src": "/media/generated/PRJ-0002/cover.webp",
+      "src": "https://images.unsplash.com/photo-1450133064473-71024230f91b?w=1600&h=900&fit=crop",
       "width": 1600,
       "height": 900,
-      "alt": "OCR pipeline dashboard showing document verification stages"
+      "alt": "Automated HR Employment Document Processing Pipeline"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1450133064473-71024230f91b?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Automated HR Employment Document Processing Pipeline - Showcase",
+        "caption": "Automated HR Employment Document Processing Pipeline Architecture & System Interface"
+      }
+    ],
     "links": {
       "demo": null,
       "repository": null,
@@ -127,7 +145,8 @@
     },
     "featuredRank": 2,
     "publishedAt": "2026-09-18T10:30:00Z",
-    "updatedAt": "2026-09-18T10:30:00Z"
+    "updatedAt": "2026-09-18T10:30:00Z",
+    "videoUrl": "https://drive.google.com/file/d/1qHUP50QZ3uni4nLUQdCkS6h68aFS9Trs/preview"
   },
   {
     "id": "PRJ-0003",
@@ -155,12 +174,20 @@
     "resultsMarkdown": "Processed 4,200 student grade files in under 2 hours without a single transcription error, cutting faculty overtime by 90% during grading periods.",
     "resultHighlight": "4,200 transcripts audited in 2 hours",
     "cover": {
-      "src": "/media/generated/PRJ-0003/cover.webp",
+      "src": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&h=900&fit=crop",
       "width": 1600,
       "height": 900,
-      "alt": "Audit report dashboard of academic reconciliation workflow"
+      "alt": "PAB University Academic Portal & Grade Audit Automation"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "PAB University Academic Portal & Grade Audit Automation - Showcase",
+        "caption": "PAB University Academic Portal & Grade Audit Automation Architecture & System Interface"
+      }
+    ],
     "links": {
       "demo": null,
       "repository": null,
@@ -168,7 +195,8 @@
     },
     "featuredRank": 3,
     "publishedAt": "2026-09-15T09:00:00Z",
-    "updatedAt": "2026-09-15T09:00:00Z"
+    "updatedAt": "2026-09-15T09:00:00Z",
+    "videoUrl": "https://drive.google.com/file/d/1Q603JVwjkz-J38jRatoM4Uj1eGgDJXZZ/preview"
   },
   {
     "id": "PRJ-0004",
@@ -195,12 +223,20 @@
     "resultsMarkdown": "Handled 1,800+ patient inquiries in the first 60 days with 0 medical hallucinations, increasing off-hour booking conversions by 42% and eliminating receptionist phone queueing.",
     "resultHighlight": "+42% off-hours appointment bookings",
     "cover": {
-      "src": "/media/generated/PRJ-0004/cover.webp",
+      "src": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1600&h=900&fit=crop",
       "width": 1600,
       "height": 900,
-      "alt": "Zalo medical consultation bot workflow overview"
+      "alt": "Zalo Medical Consultation & Appointment Booking Bot"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Zalo Medical Consultation & Appointment Booking Bot - Showcase",
+        "caption": "Zalo Medical Consultation & Appointment Booking Bot Architecture & System Interface"
+      }
+    ],
     "links": {
       "demo": null,
       "repository": null,
@@ -208,7 +244,8 @@
     },
     "featuredRank": 4,
     "publishedAt": "2026-09-10T14:00:00Z",
-    "updatedAt": "2026-09-10T14:00:00Z"
+    "updatedAt": "2026-09-10T14:00:00Z",
+    "videoUrl": "https://drive.google.com/file/d/1IbmBV9ne7pYUFcRnin3QZoA2cv2rnoHt/preview"
   },
   {
     "id": "PRJ-0005",
@@ -236,12 +273,20 @@
     "resultsMarkdown": "Delivered 120+ consecutive daily audio editions without failure, condensing 3 hours of daily reading into an actionable 10-minute briefing.",
     "resultHighlight": "120+ consecutive automated daily digests",
     "cover": {
-      "src": "/media/generated/PRJ-0005/cover.webp",
+      "src": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1600&h=900&fit=crop",
       "width": 1600,
       "height": 900,
-      "alt": "AI Newspaper Digest architecture and podcast generation"
+      "alt": "Autonomous Multilingual Research & News Digest Agent"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Autonomous Multilingual Research & News Digest Agent - Showcase",
+        "caption": "Autonomous Multilingual Research & News Digest Agent Architecture & System Interface"
+      }
+    ],
     "links": {
       "demo": "https://example.com/demo",
       "repository": "https://github.com/danhphan/ai-newspaper-agent",
@@ -249,7 +294,8 @@
     },
     "featuredRank": 5,
     "publishedAt": "2026-09-05T07:00:00Z",
-    "updatedAt": "2026-09-05T07:00:00Z"
+    "updatedAt": "2026-09-05T07:00:00Z",
+    "videoUrl": "https://drive.google.com/file/d/13I-S7gqkAeB8pA5M5yynI5tWdiKkX-Qw/preview"
   },
   {
     "id": "PRJ-0006",
@@ -276,12 +322,20 @@
     "resultsMarkdown": "Reduced average first-response time from 4.2 hours to under 3 minutes, boosting enrollment consultation conversion by 28%.",
     "resultHighlight": "First response in under 3 minutes",
     "cover": {
-      "src": "/media/generated/PRJ-0006/cover.webp",
+      "src": "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1600&h=900&fit=crop",
       "width": 1600,
       "height": 900,
-      "alt": "Omnichannel lead routing workflow and notifications"
+      "alt": "Vocational Center Omnichannel Lead Routing & Consultation Workflow"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Vocational Center Omnichannel Lead Routing & Consultation Workflow - Showcase",
+        "caption": "Vocational Center Omnichannel Lead Routing & Consultation Workflow Architecture & System Interface"
+      }
+    ],
     "links": {
       "demo": null,
       "repository": null,
@@ -289,7 +343,8 @@
     },
     "featuredRank": 6,
     "publishedAt": "2026-08-28T11:00:00Z",
-    "updatedAt": "2026-08-28T11:00:00Z"
+    "updatedAt": "2026-08-28T11:00:00Z",
+    "videoUrl": "https://drive.google.com/file/d/1Oco0H_f5ZQ96IsGto_FMqPHR_TGlhMjY/preview"
   },
   {
     "id": "PRJ-0007",
@@ -317,12 +372,20 @@
     "resultsMarkdown": "Filtered out 65% of unqualified inquiries before sales specialist review, increasing qualified opportunity win rates by 22%.",
     "resultHighlight": "65% noise reduction for sales team",
     "cover": {
-      "src": "/media/generated/PRJ-0007/cover.webp",
+      "src": "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1600&h=900&fit=crop",
       "width": 1600,
       "height": 900,
-      "alt": "B2B Medical Device Qualification Engine architecture"
+      "alt": "B2B Medical Device Distribution Lead Qualification Engine"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "B2B Medical Device Distribution Lead Qualification Engine - Showcase",
+        "caption": "B2B Medical Device Distribution Lead Qualification Engine Architecture & System Interface"
+      }
+    ],
     "links": {
       "demo": null,
       "repository": null,
@@ -330,7 +393,8 @@
     },
     "featuredRank": null,
     "publishedAt": "2026-08-20T15:00:00Z",
-    "updatedAt": "2026-08-20T15:00:00Z"
+    "updatedAt": "2026-08-20T15:00:00Z",
+    "videoUrl": "https://drive.google.com/file/d/1kqqEvPPnRhWpPpGfY8JvIYcIxaYf2PPe/preview"
   },
   {
     "id": "PRJ-0008",
@@ -357,12 +421,20 @@
     "resultsMarkdown": "Achieved sub-350ms end-to-end voice latency on a single consumer GPU while saving $400/month in cloud transcription costs.",
     "resultHighlight": "<350ms end-to-end voice latency",
     "cover": {
-      "src": "/media/generated/PRJ-0008/cover.webp",
+      "src": "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=1600&h=900&fit=crop",
       "width": 1600,
       "height": 900,
-      "alt": "Real-time speech inference pipeline audio waveform visualizer"
+      "alt": "Low-Latency Vietnamese Speech Recognition & Synthesis Pipeline"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Low-Latency Vietnamese Speech Recognition & Synthesis Pipeline - Showcase",
+        "caption": "Low-Latency Vietnamese Speech Recognition & Synthesis Pipeline Architecture & System Interface"
+      }
+    ],
     "links": {
       "demo": null,
       "repository": "https://github.com/danhphan/low-latency-speech-pipeline",
@@ -370,7 +442,8 @@
     },
     "featuredRank": null,
     "publishedAt": "2026-08-10T10:00:00Z",
-    "updatedAt": "2026-08-10T10:00:00Z"
+    "updatedAt": "2026-08-10T10:00:00Z",
+    "videoUrl": null
   },
   {
     "id": "PRJ-0009",
@@ -397,12 +470,20 @@
     "resultsMarkdown": "Adopted by over 500 students in pilot testing with an 88% positive engagement rating and noticeable improvements in kinematics quiz scores.",
     "resultHighlight": "60fps real-time physics on mobile",
     "cover": {
-      "src": "/media/generated/PRJ-0009/cover.webp",
+      "src": "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?w=1600&h=900&fit=crop",
       "width": 1600,
       "height": 900,
-      "alt": "STEM simulation interactive physics workbench interface"
+      "alt": "Interactive STEM Physics Simulation & Virtual Laboratory"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Interactive STEM Physics Simulation & Virtual Laboratory - Showcase",
+        "caption": "Interactive STEM Physics Simulation & Virtual Laboratory Architecture & System Interface"
+      }
+    ],
     "links": {
       "demo": "https://example.com/stem-demo",
       "repository": "https://github.com/danhphan/stem-simulation",
@@ -410,7 +491,8 @@
     },
     "featuredRank": null,
     "publishedAt": "2026-07-25T13:00:00Z",
-    "updatedAt": "2026-07-25T13:00:00Z"
+    "updatedAt": "2026-07-25T13:00:00Z",
+    "videoUrl": null
   },
   {
     "id": "PRJ-0010",
@@ -438,12 +520,20 @@
     "resultsMarkdown": "Achieved continuous autonomous track navigation at speeds up to 18 km/h with sub-80ms control loop latency.",
     "resultHighlight": "Autonomous navigation at 18 km/h",
     "cover": {
-      "src": "/media/generated/PRJ-0010/cover.webp",
+      "src": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1600&h=900&fit=crop",
       "width": 1600,
       "height": 900,
-      "alt": "Autonomous RC rover hardware and telemetry dashboard"
+      "alt": "Autonomous RC Vehicle with Edge Computer Vision & Telemetry"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Autonomous RC Vehicle with Edge Computer Vision & Telemetry - Showcase",
+        "caption": "Autonomous RC Vehicle with Edge Computer Vision & Telemetry Architecture & System Interface"
+      }
+    ],
     "links": {
       "demo": null,
       "repository": "https://github.com/danhphan/autonomous-rc-iot",
@@ -451,6 +541,7 @@
     },
     "featuredRank": null,
     "publishedAt": "2026-07-10T16:00:00Z",
-    "updatedAt": "2026-07-10T16:00:00Z"
+    "updatedAt": "2026-07-10T16:00:00Z",
+    "videoUrl": null
   }
 ]

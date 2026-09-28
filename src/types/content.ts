@@ -47,6 +47,7 @@ export interface Project {
   cover: ProjectMedia;
   gallery: ProjectMedia[];
   links: ProjectLinks;
+  videoUrl?: string | null;
   featuredRank?: number | null;
   publishedAt: string;
   updatedAt: string;
