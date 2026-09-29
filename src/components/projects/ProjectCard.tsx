@@ -4,22 +4,25 @@ import Image from "next/image";
 import { Project } from "@/types/content";
 import { Badge } from "@/components/ui/Badge";
 import { ArrowUpRight, TrendingUp, Play } from "lucide-react";
+import { resolveMediaUrl } from "@/lib/content/media";
 
 interface ProjectCardProps {
   project: Project;
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const coverSrc = resolveMediaUrl(project.cover?.src);
+
   return (
     <article className="group bg-surface rounded-md border border-border shadow-card hover:shadow-card-hover transition-all duration-200 flex flex-col h-full overflow-hidden hover:border-slate-300">
       {/* Cover Image Container */}
       <div className="relative aspect-video w-full bg-slate-100 overflow-hidden border-b border-border">
-        {project.cover?.src ? (
+        {coverSrc ? (
           <Image
-            src={project.cover.src}
-            alt={project.cover.alt || project.title}
-            width={project.cover.width || 800}
-            height={project.cover.height || 450}
+            src={coverSrc}
+            alt={project.cover?.alt || project.title}
+            width={project.cover?.width || 800}
+            height={project.cover?.height || 450}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             loading="lazy"
           />

@@ -23,6 +23,8 @@ import {
   Play,
 } from "lucide-react";
 
+import { resolveMediaUrl, resolveVideoUrl } from "@/lib/content/media";
+
 interface ProjectDetailProps {
   params: {
     slug: string;
@@ -43,6 +45,7 @@ export async function generateMetadata({ params }: ProjectDetailProps): Promise<
   }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const resolvedCover = resolveMediaUrl(project.cover?.src);
 
   return {
     title: project.title,
@@ -51,7 +54,7 @@ export async function generateMetadata({ params }: ProjectDetailProps): Promise<
       title: project.title,
       description: project.summary,
       url: `${siteUrl}/projects/${project.slug}`,
-      images: project.cover?.src ? [{ url: project.cover.src, alt: project.cover.alt }] : [],
+      images: resolvedCover ? [{ url: resolvedCover, alt: project.cover.alt }] : [],
     },
   };
 }
@@ -66,6 +69,13 @@ export default function ProjectDetailPage({ params }: ProjectDetailProps) {
   const allProjects = getProjects();
   const relatedProjects = getRelatedProjects(project, allProjects, 3);
   const publishYear = new Date(project.publishedAt).getFullYear();
+
+  const coverSrc = resolveMediaUrl(project.cover?.src);
+  const videoSrc = resolveVideoUrl(project.videoUrl);
+  const resolvedGallery = (project.gallery || []).map((g) => ({
+    ...g,
+    src: resolveMediaUrl(g.src),
+  }));
 
   return (
     <article className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
@@ -135,12 +145,12 @@ export default function ProjectDetailPage({ params }: ProjectDetailProps) {
 
       {/* 3. COVER MEDIA */}
       <div className="relative aspect-video w-full rounded-lg overflow-hidden border border-border bg-slate-100 shadow-card">
-        {project.cover?.src ? (
+        {coverSrc ? (
           <Image
-            src={project.cover.src}
-            alt={project.cover.alt}
-            width={project.cover.width || 1600}
-            height={project.cover.height || 900}
+            src={coverSrc}
+            alt={project.cover?.alt || project.title}
+            width={project.cover?.width || 1600}
+            height={project.cover?.height || 900}
             className="w-full h-full object-cover"
             priority
           />
@@ -152,7 +162,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailProps) {
       </div>
 
       {/* 3.1 DEMO VIDEO PLAYER (IF AVAILABLE) */}
-      {project.videoUrl && (
+      {videoSrc && (
         <section className="space-y-4" aria-labelledby="video-walkthrough-heading">
           <div className="flex items-center justify-between">
             <h2 id="video-walkthrough-heading" className="text-xl sm:text-2xl font-bold text-text flex items-center">
@@ -165,11 +175,11 @@ export default function ProjectDetailPage({ params }: ProjectDetailProps) {
           </div>
 
           <div className="relative aspect-video w-full rounded-lg overflow-hidden border border-slate-700 bg-slate-950 shadow-xl">
-            {project.videoUrl.includes("drive.google.com") ||
-            project.videoUrl.includes("youtube.com") ||
-            project.videoUrl.includes("youtu.be") ? (
+            {videoSrc.includes("drive.google.com") ||
+            videoSrc.includes("youtube.com") ||
+            videoSrc.includes("youtu.be") ? (
               <iframe
-                src={project.videoUrl}
+                src={videoSrc}
                 className="w-full h-full border-0"
                 allow="autoplay; encrypted-media; fullscreen"
                 allowFullScreen
@@ -177,10 +187,10 @@ export default function ProjectDetailPage({ params }: ProjectDetailProps) {
               />
             ) : (
               <video
-                src={project.videoUrl}
+                src={videoSrc}
                 controls
                 className="w-full h-full object-contain"
-                poster={project.cover?.src}
+                poster={coverSrc}
               >
                 Your browser does not support HTML5 video playback.
               </video>
@@ -291,8 +301,8 @@ export default function ProjectDetailPage({ params }: ProjectDetailProps) {
           </section>
 
           {/* 9. GALLERY ARTIFACTS */}
-          {project.gallery && project.gallery.length > 0 && (
-            <ProjectGallery media={project.gallery} title={project.title} />
+          {resolvedGallery && resolvedGallery.length > 0 && (
+            <ProjectGallery media={resolvedGallery} title={project.title} />
           )}
         </div>
 

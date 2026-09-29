@@ -13,9 +13,10 @@ function onOpen() {
   ui.createMenu("🚀 AIHOC CMS")
     .addItem("📁 1. Tự động tạo Folder Drive cho các dự án", "createProjectFolders")
     .addItem("🎬 2. Sao chép Video từ Thư mục nguồn vào từng Dự án", "copyVideosToProjectFolders")
-    .addItem("🌐 3. Xuất bản nội dung lên Website", "triggerPublishWebhook")
+    .addItem("🖼️ 3. Đồng bộ & Nạp Ảnh thật vào từng Folder Drive", "syncImagesToDriveFolders")
+    .addItem("🌐 4. Xuất bản nội dung lên Website", "triggerPublishWebhook")
     .addSeparator()
-    .addItem("✨ 4. Nạp dữ liệu 10 dự án chuẩn (Khớp 11 cột & Ảnh HD)", "cleanAndSeed10Projects")
+    .addItem("✨ 5. Nạp dữ liệu 10 dự án chuẩn (Khớp 11 cột & Ảnh HD)", "cleanAndSeed10Projects")
     .addToUi();
 }
 
@@ -291,6 +292,84 @@ function cleanAndSeed10Projects() {
   // Sao chép video vào các folder dự án
   copyVideosToProjectFolders();
 
+  // Đồng bộ và tải ảnh vào từng folder dự án trên Drive
+  syncImagesToDriveFolders();
+
   // Kích hoạt n8n đồng bộ dữ liệu lên website
   triggerPublishWebhook();
+}
+
+/**
+ * Tải hình ảnh HD chuẩn và nạp vào đúng Folder Drive của từng dự án,
+ * sau đó cập nhật link Google Drive thật vào cột Image (Cột D) trên Google Sheet.
+ */
+function syncImagesToDriveFolders() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Projects");
+  if (!sheet) return;
+
+  const parentFolder = DriveApp.getFolderById(PROJECTS_PARENT_FOLDER_ID);
+  const data = sheet.getDataRange().getValues();
+
+  // Bản đồ ảnh HD cho các dự án nếu chưa có file
+  const defaultImages = {
+    "PRJ-AGENT-01": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&h=900&fit=crop",
+    "PRJ-0001": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&h=900&fit=crop",
+    "PRJ-0002": "https://images.unsplash.com/photo-1450133064473-71024230f91b?w=1600&h=900&fit=crop",
+    "PRJ-0003": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&h=900&fit=crop",
+    "PRJ-0004": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1600&h=900&fit=crop",
+    "PRJ-0005": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1600&h=900&fit=crop",
+    "PRJ-0006": "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1600&h=900&fit=crop",
+    "PRJ-0007": "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1600&h=900&fit=crop",
+    "PRJ-0008": "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=1600&h=900&fit=crop",
+    "PRJ-0009": "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?w=1600&h=900&fit=crop",
+    "PRJ-0010": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1600&h=900&fit=crop"
+  };
+
+  const projectFolders = [];
+  const folderIter = parentFolder.getFolders();
+  while (folderIter.hasNext()) {
+    projectFolders.push(folderIter.next());
+  }
+
+  let updatedCount = 0;
+
+  for (let i = 1; i < data.length; i++) {
+    const row = data[i];
+    const projectId = row[0]; // Cột A: ID
+    const currentImg = row[3]; // Cột D: Image
+    if (!projectId) continue;
+
+    // Tìm folder của dự án
+    let targetFolder = projectFolders.find(f => f.getName().startsWith(projectId));
+    if (!targetFolder) continue;
+
+    // Kiểm tra xem trong folder đã có file cover.jpg chưa
+    let coverFile;
+    const existingCovers = targetFolder.getFilesByName("cover.jpg");
+    if (existingCovers.hasNext()) {
+      coverFile = existingCovers.next();
+    } else {
+      // Nếu chưa có, tải ảnh về và tạo cover.jpg trên Drive
+      const imgSource = (currentImg && currentImg.startsWith("http")) ? currentImg : (defaultImages[projectId] || defaultImages["PRJ-0001"]);
+      try {
+        const resp = UrlFetchApp.fetch(imgSource);
+        const blob = resp.getBlob().setName("cover.jpg");
+        coverFile = targetFolder.createFile(blob);
+      } catch (e) {
+        Logger.log("Error fetching image for " + projectId + ": " + e.message);
+        continue;
+      }
+    }
+
+    if (coverFile) {
+      coverFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+      const driveUrl = "https://drive.google.com/file/d/" + coverFile.getId() + "/view?usp=sharing";
+      
+      // Cập nhật vào Google Sheet dòng i+1, cột D (cột 4)
+      sheet.getRange(i + 1, 4).setValue(driveUrl);
+      updatedCount++;
+    }
+  }
+
+  SpreadsheetApp.getUi().alert("✅ Đã đồng bộ xong " + updatedCount + " hình ảnh thật vào các thư mục Google Drive và cập nhật link Drive lên Sheet!");
 }
