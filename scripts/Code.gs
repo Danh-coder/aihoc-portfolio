@@ -17,6 +17,7 @@ function onOpen() {
     .addItem("🌐 4. Xuất bản nội dung lên Website", "triggerPublishWebhook")
     .addSeparator()
     .addItem("✨ 5. Nạp cấu trúc chuẩn 12 Cột (Có Cột Video & Ảnh HD)", "cleanAndSeed10Projects")
+    .addItem("⚙️ 6. Thiết lập & Nạp cấu hình mẫu cho tab SiteConfig", "setupAndSeedSiteConfig")
     .addToUi();
 }
 
@@ -422,4 +423,52 @@ function cleanAndSeed10Projects() {
 
   // Kích hoạt n8n đồng bộ dữ liệu lên website
   triggerPublishWebhook();
+}
+
+/**
+ * Thiết lập và nạp đầy đủ cấu hình chuẩn cho tab SiteConfig trên Google Sheet
+ */
+function setupAndSeedSiteConfig() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName("SiteConfig");
+  if (!sheet) {
+    sheet = ss.insertSheet("SiteConfig");
+  } else {
+    sheet.clear();
+  }
+
+  // 1. Tiêu đề
+  const headers = [["Key", "Value", "Description"]];
+  sheet.getRange(1, 1, 1, 3).setValues(headers);
+
+  // 2. Toàn bộ cấu hình chuẩn cho Website & Direct Contact
+  const configRows = [
+    ["contact_email", "danh@aihoc.ai.vn", "Email liên hệ chính thức hiển thị tại trang Contact & Footer"],
+    ["zalo_url", "https://zalo.me/0900000000", "Link nhắn tin trực tiếp qua Zalo (ví dụ: https://zalo.me/09xxxxxxxx)"],
+    ["linkedin_url", "https://www.linkedin.com/in/danhphan", "Link trang cá nhân LinkedIn ở Footer"],
+    ["github_url", "https://github.com/danhphan", "Link tài khoản GitHub ở Footer"],
+    ["cv_url", "", "Link Google Drive hoặc file PDF xem CV / Resume trực tuyến"],
+    ["site_name", "Danh Phan", "Tên hiển thị thương hiệu ở Header và Footer"],
+    ["headline", "AI Engineer & AI Automation Developer", "Tiêu đề chuyên môn ngắn gọn dưới tên"],
+    ["value_proposition", "I design and deliver practical AI agents, intelligent document systems, and workflow automation for real business operations.", "Câu định vị giá trị ở trang chủ"],
+    ["about_short", "AI Engineer and Automation Developer specializing in LLM applications, autonomous n8n workflows, Computer Vision/OCR, and tailored management systems.", "Mô tả ngắn gọn về bản thân"],
+    ["about_long", "With a strong engineering background and hands-on experience delivering enterprise automation, I bridge the gap between cutting-edge AI models and everyday business operations.\\n\\nMy philosophy focuses on pragmatic engineering: choosing the simplest architecture that reliably solves the problem, putting human verification on high-risk AI decisions, ensuring data sovereignty, and providing comprehensive documentation and handover.", "Bài giới thiệu chi tiết tại trang About"],
+    ["contact_cta", "Discuss a Project", "Nút kêu gọi hành động (Call To Action) trên thanh điều hướng"],
+    ["timezone", "Asia/Seoul", "Múi giờ làm việc"],
+    ["maintenance_mode", "FALSE", "Bật/Tắt chế độ bảo trì toàn bộ website (TRUE / FALSE)"]
+  ];
+
+  sheet.getRange(2, 1, configRows.length, 3).setValues(configRows);
+
+  // Định dạng thẩm mỹ: Header in đậm, nền xám xanh nhạt
+  sheet.getRange(1, 1, 1, 3)
+    .setFontWeight("bold")
+    .setBackground("#E8F0FE")
+    .setFontColor("#1A73E8");
+
+  sheet.setColumnWidth(1, 200); // Key
+  sheet.setColumnWidth(2, 400); // Value
+  sheet.setColumnWidth(3, 450); // Description
+
+  SpreadsheetApp.getUi().alert("✅ Đã khởi tạo thành công tab SiteConfig với đầy đủ các trường cấu hình trực tiếp (Email, Zalo, LinkedIn, GitHub, Headline, Bio,...)!");
 }

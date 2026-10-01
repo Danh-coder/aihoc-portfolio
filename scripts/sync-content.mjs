@@ -301,6 +301,26 @@ async function syncContent() {
         existingConfig.headline = val;
         updated = true;
         console.log(`  + Config headline: ${val}`);
+      } else if (key === "value_proposition" || key === "valueproposition") {
+        existingConfig.valueProposition = val;
+        updated = true;
+        console.log(`  + Config valueProposition: ${val}`);
+      } else if (key === "about_short" || key === "aboutshort") {
+        existingConfig.aboutShort = val;
+        updated = true;
+        console.log(`  + Config aboutShort: ${val}`);
+      } else if (key === "about_long" || key === "aboutlong") {
+        existingConfig.aboutLong = val;
+        updated = true;
+        console.log(`  + Config aboutLong: (updated multi-line text)`);
+      } else if (key === "contact_cta" || key === "contactcta") {
+        existingConfig.contactCta = val;
+        updated = true;
+        console.log(`  + Config contactCta: ${val}`);
+      } else if (key === "timezone") {
+        existingConfig.timezone = val;
+        updated = true;
+        console.log(`  + Config timezone: ${val}`);
       }
     }
 
