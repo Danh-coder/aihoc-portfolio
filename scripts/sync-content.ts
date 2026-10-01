@@ -279,6 +279,12 @@ async function syncContent() {
 }
 
 syncContent().catch((err) => {
-  console.error("[SyncContent] Error:", err);
+  console.error("[SyncContent] Error syncing from Google Sheets:", err);
+  const projectsPath = path.join(CONTENT_DIR, "projects.json");
+  const servicesPath = path.join(CONTENT_DIR, "services.json");
+  if (fs.existsSync(projectsPath) && fs.existsSync(servicesPath)) {
+    console.warn("[SyncContent] Fallback warning: using existing cached content from repository.");
+    process.exit(0);
+  }
   process.exit(1);
 });
