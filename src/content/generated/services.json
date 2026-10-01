@@ -21,7 +21,7 @@
     "iconKey": "bot",
     "displayOrder": 1,
     "active": true,
-    "updatedAt": "2026-10-01T16:15:44.506Z"
+    "updatedAt": "2026-10-01T16:31:54.282Z"
   },
   {
     "serviceKey": "WORKFLOW_AUTOMATION",
@@ -47,7 +47,7 @@
     "iconKey": "workflow",
     "displayOrder": 2,
     "active": true,
-    "updatedAt": "2026-10-01T16:15:44.507Z"
+    "updatedAt": "2026-10-01T16:31:54.282Z"
   },
   {
     "serviceKey": "DOCUMENT_AI_OCR",
@@ -71,7 +71,7 @@
     "iconKey": "filetext",
     "displayOrder": 3,
     "active": true,
-    "updatedAt": "2026-10-01T16:15:44.507Z"
+    "updatedAt": "2026-10-01T16:31:54.282Z"
   },
   {
     "serviceKey": "ZALO_CUSTOMER_SERVICE",
@@ -96,7 +96,7 @@
     "iconKey": "messagesquare",
     "displayOrder": 4,
     "active": true,
-    "updatedAt": "2026-10-01T16:15:44.507Z"
+    "updatedAt": "2026-10-01T16:31:54.282Z"
   },
   {
     "serviceKey": "CUSTOM_MANAGEMENT_SYSTEM",
@@ -123,7 +123,7 @@
     "iconKey": "layoutgrid",
     "displayOrder": 5,
     "active": true,
-    "updatedAt": "2026-10-01T16:15:44.507Z"
+    "updatedAt": "2026-10-01T16:31:54.282Z"
   },
   {
     "serviceKey": "AI_TRAINING",
@@ -148,7 +148,7 @@
     "iconKey": "graduationcap",
     "displayOrder": 6,
     "active": true,
-    "updatedAt": "2026-10-01T16:15:44.507Z"
+    "updatedAt": "2026-10-01T16:31:54.282Z"
   },
   {
     "serviceKey": "OTHER",
@@ -173,6 +173,6 @@
     "iconKey": "sparkles",
     "displayOrder": 7,
     "active": true,
-    "updatedAt": "2026-10-01T16:15:44.507Z"
+    "updatedAt": "2026-10-01T16:31:54.282Z"
   }
 ]
