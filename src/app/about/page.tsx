@@ -95,6 +95,13 @@ export default function AboutPage() {
             {config.aboutLong}
           </p>
         </div>
+        {config.cvUrl && (
+          <div className="pt-2">
+            <Button href={config.cvUrl} target="_blank" rel="noopener noreferrer" variant="outline">
+              View Full CV / Resume (Google Drive)
+            </Button>
+          </div>
+        )}
       </section>
 
       {/* 2. CAPABILITIES */}
@@ -198,10 +205,17 @@ export default function AboutPage() {
             Let&apos;s discuss how practical AI automation can streamline your team&apos;s workflow.
           </p>
         </div>
-        <Button href="/contact" size="lg" variant="primary">
-          {config.contactCta}
-          <ArrowRight className="w-5 h-5 ml-2" />
-        </Button>
+        <div className="flex flex-wrap items-center gap-4">
+          {config.cvUrl && (
+            <Button href={config.cvUrl} target="_blank" rel="noopener noreferrer" size="lg" variant="outline">
+              View CV / Resume
+            </Button>
+          )}
+          <Button href="/contact" size="lg" variant="primary">
+            {config.contactCta}
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Button>
+        </div>
       </div>
     </div>
   );

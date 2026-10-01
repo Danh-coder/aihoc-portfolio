@@ -75,6 +75,12 @@ export default function HomePage() {
               <Button href="/projects" size="lg" variant="outline">
                 View Case Studies
               </Button>
+
+              {config.cvUrl && (
+                <Button href={config.cvUrl} target="_blank" rel="noopener noreferrer" size="lg" variant="ghost">
+                  View CV / Resume
+                </Button>
+              )}
             </div>
           </div>
         </div>
