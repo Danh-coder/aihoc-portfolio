@@ -324,6 +324,42 @@ async function syncContent() {
       }
     }
 
+    // Fallback: If pasted as single cell or space-delimited text, extract contact URLs via regex
+    const emailMatch = configCsv.match(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/);
+    if (emailMatch && existingConfig.contactEmailPublic !== emailMatch[1]) {
+      existingConfig.contactEmailPublic = emailMatch[1];
+      updated = true;
+      console.log(`  + Extracted contactEmailPublic via regex: ${emailMatch[1]}`);
+    }
+
+    const zaloMatch = configCsv.match(/(https?:\/\/(?:zalo\.me|zaloapp\.com)\/[^\s",]+)/);
+    if (zaloMatch && existingConfig.zaloUrl !== zaloMatch[1]) {
+      existingConfig.zaloUrl = zaloMatch[1];
+      updated = true;
+      console.log(`  + Extracted zaloUrl via regex: ${zaloMatch[1]}`);
+    }
+
+    const linkedinMatch = configCsv.match(/(https?:\/\/(?:www\.)?linkedin\.com\/in\/[^\s",]+)/);
+    if (linkedinMatch && existingConfig.linkedinUrl !== linkedinMatch[1]) {
+      existingConfig.linkedinUrl = linkedinMatch[1];
+      updated = true;
+      console.log(`  + Extracted linkedinUrl via regex: ${linkedinMatch[1]}`);
+    }
+
+    const githubMatch = configCsv.match(/(https?:\/\/(?:www\.)?github\.com\/[^\s",]+)/);
+    if (githubMatch && existingConfig.githubUrl !== githubMatch[1]) {
+      existingConfig.githubUrl = githubMatch[1];
+      updated = true;
+      console.log(`  + Extracted githubUrl via regex: ${githubMatch[1]}`);
+    }
+
+    const cvMatch = configCsv.match(/(https?:\/\/drive\.google\.com\/file\/d\/[^\s",]+)/);
+    if (cvMatch && existingConfig.cvUrl !== cvMatch[1]) {
+      existingConfig.cvUrl = cvMatch[1];
+      updated = true;
+      console.log(`  + Extracted cvUrl via regex: ${cvMatch[1]}`);
+    }
+
     if (updated) {
       fs.writeFileSync(siteConfigPath, JSON.stringify(existingConfig, null, 2), "utf8");
       console.log(`[SyncContent] Updated site-config.json from Google Sheets 'SiteConfig' tab.`);
