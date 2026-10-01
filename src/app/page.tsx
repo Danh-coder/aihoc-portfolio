@@ -30,9 +30,17 @@ export default function HomePage() {
     bot: <Bot className="w-6 h-6 text-primary" />,
     workflow: <Workflow className="w-6 h-6 text-primary" />,
     "file-scan": <FileScan className="w-6 h-6 text-primary" />,
+    filetext: <FileScan className="w-6 h-6 text-primary" />,
+    "file-text": <FileScan className="w-6 h-6 text-primary" />,
     "message-square": <MessageSquare className="w-6 h-6 text-primary" />,
+    messagesquare: <MessageSquare className="w-6 h-6 text-primary" />,
     "layout-dashboard": <LayoutDashboard className="w-6 h-6 text-primary" />,
+    layoutdashboard: <LayoutDashboard className="w-6 h-6 text-primary" />,
+    layoutgrid: <LayoutDashboard className="w-6 h-6 text-primary" />,
+    "layout-grid": <LayoutDashboard className="w-6 h-6 text-primary" />,
     "graduation-cap": <GraduationCap className="w-6 h-6 text-primary" />,
+    graduationcap: <GraduationCap className="w-6 h-6 text-primary" />,
+    sparkles: <Sparkles className="w-6 h-6 text-primary" />,
   };
 
   return (

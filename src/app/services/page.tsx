@@ -11,6 +11,7 @@ import {
   MessageSquare,
   LayoutDashboard,
   GraduationCap,
+  Sparkles,
   ArrowRight,
   CheckCircle,
   Package,
@@ -29,9 +30,17 @@ export default function ServicesPage() {
     bot: <Bot className="w-8 h-8 text-primary" />,
     workflow: <Workflow className="w-8 h-8 text-primary" />,
     "file-scan": <FileScan className="w-8 h-8 text-primary" />,
+    filetext: <FileScan className="w-8 h-8 text-primary" />,
+    "file-text": <FileScan className="w-8 h-8 text-primary" />,
     "message-square": <MessageSquare className="w-8 h-8 text-primary" />,
+    messagesquare: <MessageSquare className="w-8 h-8 text-primary" />,
     "layout-dashboard": <LayoutDashboard className="w-8 h-8 text-primary" />,
+    layoutdashboard: <LayoutDashboard className="w-8 h-8 text-primary" />,
+    layoutgrid: <LayoutDashboard className="w-8 h-8 text-primary" />,
+    "layout-grid": <LayoutDashboard className="w-8 h-8 text-primary" />,
     "graduation-cap": <GraduationCap className="w-8 h-8 text-primary" />,
+    graduationcap: <GraduationCap className="w-8 h-8 text-primary" />,
+    sparkles: <Sparkles className="w-8 h-8 text-primary" />,
   };
 
   return (

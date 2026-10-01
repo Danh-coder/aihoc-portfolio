@@ -1,9 +1,9 @@
 [
   {
     "serviceKey": "AI_AGENT",
-    "slug": "ai-agent-multi-agent-systems",
-    "title": "AI Agent & Multi-Agent Systems",
-    "summary": "Phát triển các hệ thống AI tự hành, điều phối nhiều agent chuyên biệt xử lý tác vụ phức tạp cho doanh nghiệp.",
+    "slug": "ai-agent-development",
+    "title": "AI Agent Development",
+    "summary": "Grounded AI assistants for research, internal knowledge, sales support, and task orchestration with clear human controls.",
     "capabilities": [
       "Requirement Analysis",
       "LLM & Tool Integration",
@@ -19,13 +19,13 @@
     "iconKey": "bot",
     "displayOrder": 1,
     "active": true,
-    "updatedAt": "2026-09-25T16:39:34.520Z"
+    "updatedAt": "2026-10-01T06:51:30.000Z"
   },
   {
     "serviceKey": "WORKFLOW_AUTOMATION",
     "slug": "workflow-automation",
     "title": "Workflow Automation",
-    "summary": "End-to-end automation for repetitive operational processes, cross-system sync, and automated reporting.",
+    "summary": "Reliable automation for repetitive operations, cross-system data movement, scheduled processing, and status reporting.",
     "capabilities": [
       "Process Mapping",
       "n8n & Webhook Orchestration",
@@ -41,13 +41,13 @@
     "iconKey": "workflow",
     "displayOrder": 2,
     "active": true,
-    "updatedAt": "2026-09-22T00:00:00Z"
+    "updatedAt": "2026-10-01T06:51:30.001Z"
   },
   {
     "serviceKey": "DOCUMENT_AI_OCR",
     "slug": "document-ai-ocr",
     "title": "Document AI & OCR",
-    "summary": "High-accuracy text extraction, table parsing, and structured data extraction from invoices, contracts, and IDs.",
+    "summary": "Structured extraction from scanned documents, PDFs, images, forms, contracts, and operational records.",
     "capabilities": [
       "Multi-Engine OCR (Paddle/Surya/Vision)",
       "Document Classification",
@@ -60,16 +60,16 @@
       "Verification UI Interface",
       "Production API"
     ],
-    "iconKey": "file-scan",
+    "iconKey": "filetext",
     "displayOrder": 3,
     "active": true,
-    "updatedAt": "2026-09-22T00:00:00Z"
+    "updatedAt": "2026-10-01T06:51:30.001Z"
   },
   {
     "serviceKey": "ZALO_CUSTOMER_SERVICE",
-    "slug": "zalo-customer-service",
-    "title": "Zalo Bot & Customer Service",
-    "summary": "Official Zalo OA bots integrated with CRM, Google Sheets, or internal APIs to automate client inquiries 24/7.",
+    "slug": "zalo-bots-customer-service",
+    "title": "Zalo Bots & Customer Service",
+    "summary": "Zalo OA assistants that connect customer conversations with schedules, records, forms, and internal workflows.",
     "capabilities": [
       "Zalo OA Webhook Handling",
       "Intent Recognition & FAQ Flow",
@@ -82,16 +82,16 @@
       "Activity Audit Logs",
       "Deployment Runbook"
     ],
-    "iconKey": "message-square",
+    "iconKey": "messagesquare",
     "displayOrder": 4,
     "active": true,
-    "updatedAt": "2026-09-22T00:00:00Z"
+    "updatedAt": "2026-10-01T06:51:30.001Z"
   },
   {
     "serviceKey": "CUSTOM_MANAGEMENT_SYSTEM",
-    "slug": "custom-management-system",
-    "title": "Custom Management System",
-    "summary": "Focused internal tools, admin portals, and data management systems for workflows that have outgrown spreadsheets.",
+    "slug": "custom-management-systems",
+    "title": "Custom Management Systems",
+    "summary": "Focused web applications and internal tools for teams that have outgrown spreadsheets and disconnected manual processes.",
     "capabilities": [
       "Operational Architecture",
       "Responsive Web Application",
@@ -104,16 +104,16 @@
       "Dockerized Deployment",
       "Administrator Guide"
     ],
-    "iconKey": "layout-dashboard",
+    "iconKey": "layoutgrid",
     "displayOrder": 5,
     "active": true,
-    "updatedAt": "2026-09-22T00:00:00Z"
+    "updatedAt": "2026-10-01T06:51:30.001Z"
   },
   {
     "serviceKey": "AI_TRAINING",
-    "slug": "ai-training",
-    "title": "AI Training",
-    "summary": "Hands-on corporate training on AI automation, practical prompting, n8n workflows, and responsible AI adoption.",
+    "slug": "ai-training-enablement",
+    "title": "AI Training & Enablement",
+    "summary": "Practical training that helps teams apply AI and automation safely in their daily work.",
     "capabilities": [
       "Curriculum Customization",
       "Practical Hands-on Labs",
@@ -126,9 +126,31 @@
       "Prompt & Workflow Cheatsheets",
       "Student Follow-up Sessions"
     ],
-    "iconKey": "graduation-cap",
+    "iconKey": "graduationcap",
     "displayOrder": 6,
     "active": true,
-    "updatedAt": "2026-09-22T00:00:00Z"
+    "updatedAt": "2026-10-01T06:51:30.001Z"
+  },
+  {
+    "serviceKey": "OTHER",
+    "slug": "ai-automation-consulting",
+    "title": "AI & Automation Consulting",
+    "summary": "Technical discovery and solution design for AI, automation, data, and software initiatives that do not fit a standard package.",
+    "capabilities": [
+      "Requirement Analysis",
+      "System Architecture & API Design",
+      "Production Integration",
+      "Testing & Observability"
+    ],
+    "deliverables": [
+      "Functional Software Module",
+      "API Documentation & Runbooks",
+      "Monitoring & Alerts",
+      "Deployment & Handover"
+    ],
+    "iconKey": "sparkles",
+    "displayOrder": 7,
+    "active": true,
+    "updatedAt": "2026-10-01T06:51:30.001Z"
   }
 ]

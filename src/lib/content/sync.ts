@@ -20,6 +20,13 @@ export interface SyncResult {
 function fetchLatestSnapshot(): Promise<any> {
   return new Promise((resolve, reject) => {
     const url = new URL(PUBLISH_WEBHOOK_URL);
+    const postData = JSON.stringify({
+      action: "FETCH_ONLY",
+      mode: "EXPORT_SNAPSHOT",
+      source: "website-api-sync",
+      timestamp: new Date().toISOString(),
+    });
+
     const req = https.request(
       {
         hostname: url.hostname,
@@ -28,6 +35,7 @@ function fetchLatestSnapshot(): Promise<any> {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Content-Length": Buffer.byteLength(postData),
         },
       },
       (res) => {
@@ -47,7 +55,12 @@ function fetchLatestSnapshot(): Promise<any> {
       }
     );
 
+    req.setTimeout(20000, () => {
+      req.destroy(new Error("Timeout connecting to n8n publish webhook (20s)"));
+    });
+
     req.on("error", reject);
+    req.write(postData);
     req.end();
   });
 }

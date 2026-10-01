@@ -19,6 +19,13 @@ interface PublishResponse {
 function fetchLatestSnapshot(): Promise<PublishResponse> {
   return new Promise((resolve, reject) => {
     const url = new URL(PUBLISH_WEBHOOK_URL);
+    const postData = JSON.stringify({
+      action: "FETCH_ONLY",
+      mode: "EXPORT_SNAPSHOT",
+      source: "website-build-sync",
+      timestamp: new Date().toISOString(),
+    });
+
     const req = https.request(
       {
         hostname: url.hostname,
@@ -27,6 +34,7 @@ function fetchLatestSnapshot(): Promise<PublishResponse> {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Content-Length": Buffer.byteLength(postData),
         },
       },
       (res) => {
@@ -37,16 +45,21 @@ function fetchLatestSnapshot(): Promise<PublishResponse> {
             try {
               resolve(JSON.parse(data));
             } catch (e) {
-              reject(new Error(`Failed to parse response: ${data}`));
+              reject(new Error(`Failed to parse response: ${data.slice(0, 100)}`));
             }
           } else {
-            reject(new Error(`Webhook failed with status ${res.statusCode}: ${data}`));
+            reject(new Error(`Webhook failed with status ${res.statusCode}: ${data.slice(0, 100)}`));
           }
         });
       }
     );
 
+    req.setTimeout(20000, () => {
+      req.destroy(new Error("Timeout connecting to n8n publish webhook (20s)"));
+    });
+
     req.on("error", reject);
+    req.write(postData);
     req.end();
   });
 }
