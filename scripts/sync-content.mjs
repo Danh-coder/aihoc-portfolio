@@ -251,7 +251,68 @@ async function syncContent() {
     console.error(`[SyncContent] Services sync warning:`, err.message);
   }
 
-  // 3. Manifest
+  // 3. SiteConfig (sync contact info & metadata from Google Sheets 'SiteConfig' tab)
+  const siteConfigPath = path.join(CONTENT_DIR, "site-config.json");
+  let existingConfig = {};
+  if (fs.existsSync(siteConfigPath)) {
+    try {
+      existingConfig = JSON.parse(fs.readFileSync(siteConfigPath, "utf8"));
+    } catch {
+      existingConfig = {};
+    }
+  }
+
+  try {
+    const configCsv = await fetchGoogleSheetCsv("SiteConfig");
+    const rawConfigRows = parseCsv(configCsv);
+    console.log(`[SyncContent] Found ${rawConfigRows.length} rows in 'SiteConfig' tab.`);
+
+    let updated = false;
+    for (const row of rawConfigRows) {
+      const key = (row.Key || row.key || row.Field || row.Setting || "").trim().toLowerCase();
+      const val = (row.Value || row.value || "").trim();
+      if (!key || !val) continue;
+
+      if (key === "contact_email" || key === "contactemail" || key === "contactemailpublic") {
+        existingConfig.contactEmailPublic = val;
+        updated = true;
+        console.log(`  + Config contactEmailPublic: ${val}`);
+      } else if (key === "zalo_url" || key === "zalourl" || key === "zalo") {
+        existingConfig.zaloUrl = val;
+        updated = true;
+        console.log(`  + Config zaloUrl: ${val}`);
+      } else if (key === "linkedin_url" || key === "linkedinurl" || key === "linkedin") {
+        existingConfig.linkedinUrl = val;
+        updated = true;
+        console.log(`  + Config linkedinUrl: ${val}`);
+      } else if (key === "github_url" || key === "githuburl" || key === "github") {
+        existingConfig.githubUrl = val;
+        updated = true;
+        console.log(`  + Config githubUrl: ${val}`);
+      } else if (key === "cv_url" || key === "cvurl" || key === "cv") {
+        existingConfig.cvUrl = val;
+        updated = true;
+        console.log(`  + Config cvUrl: ${val}`);
+      } else if (key === "site_name" || key === "sitename") {
+        existingConfig.siteName = val;
+        updated = true;
+        console.log(`  + Config siteName: ${val}`);
+      } else if (key === "headline") {
+        existingConfig.headline = val;
+        updated = true;
+        console.log(`  + Config headline: ${val}`);
+      }
+    }
+
+    if (updated) {
+      fs.writeFileSync(siteConfigPath, JSON.stringify(existingConfig, null, 2), "utf8");
+      console.log(`[SyncContent] Updated site-config.json from Google Sheets 'SiteConfig' tab.`);
+    }
+  } catch (err) {
+    console.warn(`[SyncContent] SiteConfig sync optional note:`, err.message);
+  }
+
+  // 4. Manifest
   if (fs.existsSync(projectsPath)) {
     const currentProjects = JSON.parse(fs.readFileSync(projectsPath, "utf8"));
     const currentServices = fs.existsSync(servicesPath) ? JSON.parse(fs.readFileSync(servicesPath, "utf8")) : [];
