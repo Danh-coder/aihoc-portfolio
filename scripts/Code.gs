@@ -7,6 +7,7 @@
 const PROJECTS_PARENT_FOLDER_ID = "14tInMIEw8POFBHObxT0HzsU9C6V5mxKM";
 const SOURCE_VIDEOS_FOLDER_ID = "1vPlE_BUUBRpYikzojz2ePFs0FGdnwK0P";
 const N8N_PUBLISH_WEBHOOK_URL = "https://n8n.aihoc.ai.vn/webhook/portfolio/publish";
+const VERCEL_DEPLOY_HOOK_URL = "https://api.vercel.com/v1/integrations/deploy/prj_1Wp6YoheiZIN4ClVv9m9qwuK1DLu/9vOAJAjy49?ref=main&buildCache=false";
 
 function onOpen() {
   const ui = SpreadsheetApp.getUi();
@@ -204,7 +205,7 @@ function syncImagesToDriveFolders() {
 }
 
 /**
- * Kích hoạt n8n webhook xuất bản website
+ * Kích hoạt xuất bản website: Đồng thời gọi n8n workflow và kích hoạt trực tiếp Vercel Deploy Hook
  */
 function triggerPublishWebhook() {
   const options = {
@@ -218,11 +219,32 @@ function triggerPublishWebhook() {
     muteHttpExceptions: true
   };
 
+  let n8nSuccess = false;
+  let vercelSuccess = false;
+
+  // 1. Kích hoạt n8n workflow (để n8n ghi nhận và xử lý nếu cần)
   try {
     const response = UrlFetchApp.fetch(N8N_PUBLISH_WEBHOOK_URL, options);
-    SpreadsheetApp.getUi().alert("✅ Đã kích hoạt xuất bản thành công! Website đang được n8n đồng bộ và cập nhật.");
+    n8nSuccess = (response.getResponseCode() >= 200 && response.getResponseCode() < 300);
   } catch (err) {
-    SpreadsheetApp.getUi().alert("❌ Lỗi kích hoạt Webhook: " + err.message);
+    Logger.log("Lỗi gọi n8n: " + err.message);
+  }
+
+  // 2. Kích hoạt trực tiếp Vercel Deploy Hook (đảm bảo website build ngay trong 35-45s, không bị nghẽn nhánh rẽ của n8n)
+  try {
+    const vRes = UrlFetchApp.fetch(VERCEL_DEPLOY_HOOK_URL, {
+      method: "post",
+      muteHttpExceptions: true
+    });
+    vercelSuccess = (vRes.getResponseCode() >= 200 && vRes.getResponseCode() < 300);
+  } catch (vErr) {
+    Logger.log("Lỗi gọi Vercel Deploy Hook: " + vErr.message);
+  }
+
+  if (vercelSuccess || n8nSuccess) {
+    SpreadsheetApp.getUi().alert("✅ Đã kích hoạt xuất bản thành công! Vercel đang tự động kéo dữ liệu mới nhất từ Google Sheet và biên dịch lại website (mất khoảng 35-45 giây).");
+  } else {
+    SpreadsheetApp.getUi().alert("❌ Lỗi khi kích hoạt xuất bản. Vui lòng kiểm tra kết nối mạng.");
   }
 }
 
