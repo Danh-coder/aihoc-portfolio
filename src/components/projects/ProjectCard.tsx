@@ -66,8 +66,18 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 {key.replace(/_/g, " ")}
               </span>
             ))}
-            <span className="text-xs text-slate-400">•</span>
-            <span className="text-xs text-slate-500 font-medium">{project.industry}</span>
+            {project.industry &&
+              !project.serviceKeys.some(
+                (k) =>
+                  k.toLowerCase() === project.industry.toLowerCase() ||
+                  k.replace(/_/g, " ").toLowerCase() ===
+                    project.industry.replace(/_/g, " ").toLowerCase()
+              ) && (
+                <>
+                  <span className="text-xs text-slate-400">•</span>
+                  <span className="text-xs text-slate-500 font-medium">{project.industry}</span>
+                </>
+              )}
           </div>
 
           {/* Title */}

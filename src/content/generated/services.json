@@ -5,10 +5,12 @@
     "title": "AI Agent Development",
     "summary": "Grounded AI assistants for research, internal knowledge, sales support, and task orchestration with clear human controls.",
     "capabilities": [
-      "Requirement Analysis",
-      "LLM & Tool Integration",
-      "Guardrails & Fallback",
-      "Evaluation & Observability"
+      "RAG and knowledge retrieval",
+      "tool and API integration",
+      "structured outputs",
+      "evaluation",
+      "guardrails",
+      "and human approval for high-impact actions."
     ],
     "deliverables": [
       "Working Autonomous Agent",
@@ -19,7 +21,7 @@
     "iconKey": "bot",
     "displayOrder": 1,
     "active": true,
-    "updatedAt": "2026-10-01T06:51:30.000Z"
+    "updatedAt": "2026-10-01T13:41:45.423Z"
   },
   {
     "serviceKey": "WORKFLOW_AUTOMATION",
@@ -27,10 +29,14 @@
     "title": "Workflow Automation",
     "summary": "Reliable automation for repetitive operations, cross-system data movement, scheduled processing, and status reporting.",
     "capabilities": [
-      "Process Mapping",
-      "n8n & Webhook Orchestration",
-      "API & Database Integration",
-      "Error Handling & Alerting"
+      "Process discovery",
+      "n8n and Python workflows",
+      "browser automation",
+      "API and webhook integration",
+      "retries",
+      "logging",
+      "alerts",
+      "and operational handover."
     ],
     "deliverables": [
       "Self-Hosted n8n Workflows",
@@ -41,7 +47,7 @@
     "iconKey": "workflow",
     "displayOrder": 2,
     "active": true,
-    "updatedAt": "2026-10-01T06:51:30.001Z"
+    "updatedAt": "2026-10-01T13:41:45.423Z"
   },
   {
     "serviceKey": "DOCUMENT_AI_OCR",
@@ -49,10 +55,12 @@
     "title": "Document AI & OCR",
     "summary": "Structured extraction from scanned documents, PDFs, images, forms, contracts, and operational records.",
     "capabilities": [
-      "Multi-Engine OCR (Paddle/Surya/Vision)",
-      "Document Classification",
-      "Structured Extraction & Schema Mapping",
-      "Human-in-the-Loop Review"
+      "OCR preprocessing",
+      "schema-based extraction",
+      "table and field mapping",
+      "confidence checks",
+      "human review queues",
+      "and private or local deployment options."
     ],
     "deliverables": [
       "Automated Intake Pipeline",
@@ -63,7 +71,7 @@
     "iconKey": "filetext",
     "displayOrder": 3,
     "active": true,
-    "updatedAt": "2026-10-01T06:51:30.001Z"
+    "updatedAt": "2026-10-01T13:41:45.424Z"
   },
   {
     "serviceKey": "ZALO_CUSTOMER_SERVICE",
@@ -71,10 +79,13 @@
     "title": "Zalo Bots & Customer Service",
     "summary": "Zalo OA assistants that connect customer conversations with schedules, records, forms, and internal workflows.",
     "capabilities": [
-      "Zalo OA Webhook Handling",
-      "Intent Recognition & FAQ Flow",
-      "CRM & Spreadsheet Sync",
-      "Human Agent Escalation"
+      "Conversation flows",
+      "record lookup",
+      "appointment support",
+      "form intake",
+      "notifications",
+      "handoff to staff",
+      "and integrations with Google Workspace or internal APIs."
     ],
     "deliverables": [
       "Zalo Bot Workflow",
@@ -85,7 +96,7 @@
     "iconKey": "messagesquare",
     "displayOrder": 4,
     "active": true,
-    "updatedAt": "2026-10-01T06:51:30.001Z"
+    "updatedAt": "2026-10-01T13:41:45.424Z"
   },
   {
     "serviceKey": "CUSTOM_MANAGEMENT_SYSTEM",
@@ -93,10 +104,15 @@
     "title": "Custom Management Systems",
     "summary": "Focused web applications and internal tools for teams that have outgrown spreadsheets and disconnected manual processes.",
     "capabilities": [
-      "Operational Architecture",
-      "Responsive Web Application",
-      "Real-time Dashboards & Reporting",
-      "Role-based Access & Audit Trails"
+      "Role-based portals",
+      "operational dashboards",
+      "data models",
+      "mobile-friendly forms",
+      "reporting",
+      "integrations",
+      "deployment",
+      "documentation",
+      "and source-code handover."
     ],
     "deliverables": [
       "Custom Web Portal",
@@ -107,7 +123,7 @@
     "iconKey": "layoutgrid",
     "displayOrder": 5,
     "active": true,
-    "updatedAt": "2026-10-01T06:51:30.001Z"
+    "updatedAt": "2026-10-01T13:41:45.424Z"
   },
   {
     "serviceKey": "AI_TRAINING",
@@ -115,10 +131,13 @@
     "title": "AI Training & Enablement",
     "summary": "Practical training that helps teams apply AI and automation safely in their daily work.",
     "capabilities": [
-      "Curriculum Customization",
-      "Practical Hands-on Labs",
-      "Workplace Automation Projects",
-      "Post-training Evaluation"
+      "Hands-on workshops",
+      "prompt and workflow design",
+      "n8n fundamentals",
+      "responsible AI practices",
+      "use-case assessment",
+      "templates",
+      "and team-specific exercises."
     ],
     "deliverables": [
       "Tailored Course Curriculum",
@@ -129,7 +148,7 @@
     "iconKey": "graduationcap",
     "displayOrder": 6,
     "active": true,
-    "updatedAt": "2026-10-01T06:51:30.001Z"
+    "updatedAt": "2026-10-01T13:41:45.424Z"
   },
   {
     "serviceKey": "OTHER",
@@ -137,10 +156,13 @@
     "title": "AI & Automation Consulting",
     "summary": "Technical discovery and solution design for AI, automation, data, and software initiatives that do not fit a standard package.",
     "capabilities": [
-      "Requirement Analysis",
-      "System Architecture & API Design",
-      "Production Integration",
-      "Testing & Observability"
+      "Requirements clarification",
+      "feasibility assessment",
+      "architecture options",
+      "prototype planning",
+      "risk review",
+      "delivery roadmap",
+      "and vendor or technology evaluation."
     ],
     "deliverables": [
       "Functional Software Module",
@@ -151,6 +173,6 @@
     "iconKey": "sparkles",
     "displayOrder": 7,
     "active": true,
-    "updatedAt": "2026-10-01T06:51:30.001Z"
+    "updatedAt": "2026-10-01T13:41:45.424Z"
   }
 ]

@@ -2,11 +2,11 @@ import fs from "fs";
 import path from "path";
 import https from "https";
 import crypto from "crypto";
-import { Project, Service } from "@/types/content";
+import { Project, Service, ProjectType } from "@/types/content";
 import { ProjectSchema, ServiceSchema } from "@/lib/validation/content.schema";
 
 const CONTENT_DIR = path.join(process.cwd(), "src/content/generated");
-const PUBLISH_WEBHOOK_URL = process.env.N8N_PUBLISH_WEBHOOK_URL || "https://n8n.aihoc.ai.vn/webhook/portfolio/publish";
+const GOOGLE_SHEET_ID = process.env.GOOGLE_SHEETS_ID || "1Oh6nSGPoPT54wAPrvurTxGHt7gSzD8KK3L5v5XHtuKo";
 
 export interface SyncResult {
   success: boolean;
@@ -17,51 +17,78 @@ export interface SyncResult {
   error?: string;
 }
 
-function fetchLatestSnapshot(): Promise<any> {
+function fetchGoogleSheetCsv(sheetName: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    const url = new URL(PUBLISH_WEBHOOK_URL);
-    const postData = JSON.stringify({
-      action: "FETCH_ONLY",
-      mode: "EXPORT_SNAPSHOT",
-      source: "website-api-sync",
-      timestamp: new Date().toISOString(),
-    });
-
-    const req = https.request(
-      {
-        hostname: url.hostname,
-        port: url.port || 443,
-        path: url.pathname + url.search,
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Content-Length": Buffer.byteLength(postData),
-        },
-      },
-      (res) => {
+    const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
+    https
+      .get(url, (res) => {
+        if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+          https
+            .get(res.headers.location, (redirectRes) => {
+              let data = "";
+              redirectRes.on("data", (chunk) => (data += chunk));
+              redirectRes.on("end", () => resolve(data));
+            })
+            .on("error", reject);
+          return;
+        }
         let data = "";
         res.on("data", (chunk) => (data += chunk));
-        res.on("end", () => {
-          if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
-            try {
-              resolve(JSON.parse(data));
-            } catch (e) {
-              reject(new Error(`Failed to parse n8n response: ${data.slice(0, 100)}`));
-            }
-          } else {
-            reject(new Error(`Webhook failed with status ${res.statusCode}: ${data.slice(0, 100)}`));
-          }
-        });
+        res.on("end", () => resolve(data));
+      })
+      .on("error", reject);
+  });
+}
+
+function parseCsv(csvText: string): Record<string, string>[] {
+  const rows: string[][] = [];
+  let currentRow: string[] = [];
+  let currentVal = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < csvText.length; i++) {
+    const char = csvText[i];
+    const nextChar = csvText[i + 1];
+
+    if (char === '"') {
+      if (inQuotes && nextChar === '"') {
+        currentVal += '"';
+        i++;
+      } else {
+        inQuotes = !inQuotes;
       }
-    );
+    } else if (char === "," && !inQuotes) {
+      currentRow.push(currentVal.trim());
+      currentVal = "";
+    } else if ((char === "\r" || char === "\n") && !inQuotes) {
+      if (char === "\r" && nextChar === "\n") {
+        i++;
+      }
+      currentRow.push(currentVal.trim());
+      currentVal = "";
+      if (currentRow.some((col) => col.length > 0)) {
+        rows.push(currentRow);
+      }
+      currentRow = [];
+    } else {
+      currentVal += char;
+    }
+  }
+  if (currentVal || currentRow.length > 0) {
+    currentRow.push(currentVal.trim());
+    if (currentRow.some((col) => col.length > 0)) {
+      rows.push(currentRow);
+    }
+  }
 
-    req.setTimeout(20000, () => {
-      req.destroy(new Error("Timeout connecting to n8n publish webhook (20s)"));
+  if (rows.length === 0) return [];
+  const headers = rows[0];
+  return rows.slice(1).map((row) => {
+    const obj: Record<string, string> = {};
+    headers.forEach((h, idx) => {
+      obj[h] = row[idx] !== undefined ? row[idx] : "";
     });
-
-    req.on("error", reject);
-    req.write(postData);
-    req.end();
+    return obj;
   });
 }
 
@@ -70,12 +97,10 @@ export async function syncContentFromN8N(): Promise<SyncResult> {
     fs.mkdirSync(CONTENT_DIR, { recursive: true });
   }
 
-  const response = await fetchLatestSnapshot();
-  if (!response.success) {
-    throw new Error("n8n publish webhook returned success: false");
-  }
+  // 1. Projects sync
+  const projectsCsv = await fetchGoogleSheetCsv("Projects");
+  const rawProjects = parseCsv(projectsCsv);
 
-  // 1. Projects sync & merge
   const projectsPath = path.join(CONTENT_DIR, "projects.json");
   let existingProjects: Project[] = [];
   if (fs.existsSync(projectsPath)) {
@@ -86,19 +111,78 @@ export async function syncContentFromN8N(): Promise<SyncResult> {
     }
   }
 
-  const projectMap = new Map<string, Project>();
+  const existingProjectMap = new Map<string, Project>();
   for (const p of existingProjects) {
-    projectMap.set(p.id, p);
+    existingProjectMap.set(p.id, p);
   }
 
-  for (const rawProj of response.published || []) {
-    const parsed = ProjectSchema.safeParse(rawProj);
+  const syncedProjects: Project[] = [];
+  for (const row of rawProjects) {
+    if (!row.ID || !row.Title) continue;
+
+    const existing = existingProjectMap.get(row.ID);
+    const title = row.Title.trim();
+    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    const videoUrl = row.Video && row.Video.trim().length > 0 ? row.Video.trim() : null;
+    const category = row.Category?.trim() || "OTHER";
+    const techStack = row.TechStack
+      ? row.TechStack.split(",").map((s) => s.trim()).filter(Boolean)
+      : existing?.technologies || ["AI & Automation"];
+
+    const summary = row.Description?.trim() || existing?.summary || title;
+    const details = row.Details?.trim() || existing?.solutionMarkdown || summary;
+
+    const projData: Project = {
+      id: row.ID.trim(),
+      slug,
+      title,
+      projectType: (row.ProjectType?.toUpperCase() === "CLIENT" ? "CLIENT" : "PERSONAL") as ProjectType,
+      client: null,
+      serviceKeys: [category],
+      industry: category,
+      technologies: techStack,
+      summary,
+      problemMarkdown: details,
+      solutionMarkdown: details,
+      roleMarkdown: existing?.roleMarkdown || "Lead AI Engineer",
+      implementationMarkdown: existing?.implementationMarkdown || null,
+      resultsMarkdown: summary,
+      resultHighlight: existing?.resultHighlight || null,
+      cover: {
+        src: row.Image?.trim() || existing?.cover?.src || "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&h=900&fit=crop",
+        width: 1600,
+        height: 900,
+        alt: title,
+      },
+      gallery: row.Image?.trim()
+        ? [
+            {
+              src: row.Image.trim(),
+              width: 1600,
+              height: 900,
+              alt: `${title} - Preview`,
+              caption: title,
+            },
+          ]
+        : existing?.gallery || [],
+      links: {
+        demo: row.LiveUrl && row.LiveUrl.trim() ? row.LiveUrl.trim() : null,
+        repository: row.GithubUrl && row.GithubUrl.trim() ? row.GithubUrl.trim() : null,
+        paper: null,
+      },
+      videoUrl,
+      featuredRank: row.Featured?.toUpperCase() === "TRUE" ? Number(row.Order) || 1 : null,
+      publishedAt: existing?.publishedAt || new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    const parsed = ProjectSchema.safeParse(projData);
     if (parsed.success) {
-      projectMap.set(parsed.data.id, parsed.data as Project);
+      syncedProjects.push(parsed.data as Project);
     }
   }
 
-  const mergedProjects = Array.from(projectMap.values()).sort((a, b) => {
+  const mergedProjects = syncedProjects.sort((a, b) => {
     const rankA = a.featuredRank ?? 999;
     const rankB = b.featuredRank ?? 999;
     if (rankA !== rankB) return rankA - rankB;
@@ -107,7 +191,10 @@ export async function syncContentFromN8N(): Promise<SyncResult> {
 
   fs.writeFileSync(projectsPath, JSON.stringify(mergedProjects, null, 2), "utf8");
 
-  // 2. Services sync & merge
+  // 2. Services sync
+  const servicesCsv = await fetchGoogleSheetCsv("Services");
+  const rawServices = parseCsv(servicesCsv);
+
   const servicesPath = path.join(CONTENT_DIR, "services.json");
   let existingServices: Service[] = [];
   if (fs.existsSync(servicesPath)) {
@@ -118,49 +205,52 @@ export async function syncContentFromN8N(): Promise<SyncResult> {
     }
   }
 
-  const serviceMap = new Map<string, Service>();
+  const existingServiceMap = new Map<string, Service>();
   for (const s of existingServices) {
-    serviceMap.set(s.serviceKey, s);
+    existingServiceMap.set(s.serviceKey, s);
   }
 
-  for (const rawSvc of response.services || []) {
-    const key = rawSvc.serviceKey || rawSvc.id;
-    const existing = serviceMap.get(key);
+  const syncedServices: Service[] = [];
+  for (const row of rawServices) {
+    if (!row.ID || !row.Title) continue;
 
-    const mergedSvc: Service = {
+    const key = row.ID.trim();
+    const existing = existingServiceMap.get(key);
+    const title = row.Title.trim();
+    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    const capabilities = row.Details
+      ? row.Details.split(",").map((s) => s.trim()).filter(Boolean)
+      : existing?.capabilities || [
+          "Requirements Clarification & Scope",
+          "Architecture & API Design",
+          "Production Integration & Verification",
+          "Deployment & Observability Handover",
+        ];
+
+    const svcData: Service = {
       serviceKey: key,
-      slug: rawSvc.slug || key.toLowerCase().replace(/_/g, "-"),
-      title: rawSvc.title || existing?.title || key,
-      summary: rawSvc.summary || rawSvc.description || existing?.summary || "",
-      capabilities: Array.isArray(rawSvc.capabilities) && rawSvc.capabilities.length > 0
-        ? rawSvc.capabilities
-        : existing?.capabilities || [
-            "Requirement Analysis",
-            "System Architecture & API Design",
-            "Production Integration",
-            "Testing & Observability",
-          ],
-      deliverables: Array.isArray(rawSvc.deliverables) && rawSvc.deliverables.length > 0
-        ? rawSvc.deliverables
-        : existing?.deliverables || [
-            "Functional Software Module",
-            "API Documentation & Runbooks",
-            "Monitoring & Alerts",
-            "Deployment & Handover",
-          ],
-      iconKey: (rawSvc.iconKey || rawSvc.icon || existing?.iconKey || "bot").toLowerCase(),
-      displayOrder: Number(rawSvc.displayOrder || rawSvc.order || existing?.displayOrder || 1),
-      active: rawSvc.active !== undefined ? Boolean(rawSvc.active) : true,
+      slug,
+      title,
+      summary: row.Description?.trim() || existing?.summary || title,
+      capabilities: capabilities.length > 0 ? capabilities : ["Architecture & Design"],
+      deliverables: existing?.deliverables || [
+        "Production-Ready Architecture & Deployment",
+        "API Integration & Documentation",
+        "Operational Monitoring & Runbook Handover",
+      ],
+      iconKey: (row.Icon?.trim() || existing?.iconKey || "bot").toLowerCase(),
+      displayOrder: Number(row.Order) || existing?.displayOrder || 1,
+      active: true,
       updatedAt: new Date().toISOString(),
     };
 
-    const parsed = ServiceSchema.safeParse(mergedSvc);
+    const parsed = ServiceSchema.safeParse(svcData);
     if (parsed.success) {
-      serviceMap.set(key, parsed.data as Service);
+      syncedServices.push(parsed.data as Service);
     }
   }
 
-  const mergedServices = Array.from(serviceMap.values()).sort((a, b) => a.displayOrder - b.displayOrder);
+  const mergedServices = syncedServices.sort((a, b) => a.displayOrder - b.displayOrder);
   fs.writeFileSync(servicesPath, JSON.stringify(mergedServices, null, 2), "utf8");
 
   // 3. Manifest update
@@ -176,7 +266,7 @@ export async function syncContentFromN8N(): Promise<SyncResult> {
     projectCount: mergedProjects.length,
     serviceCount: mergedServices.length,
     contentSha256,
-    source: "google-sheets-n8n-sync",
+    source: "google-sheets-authoritative",
   };
 
   const manifestPath = path.join(CONTENT_DIR, "manifest.json");

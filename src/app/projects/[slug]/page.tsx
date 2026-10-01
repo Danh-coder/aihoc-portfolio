@@ -123,8 +123,18 @@ export default function ProjectDetailPage({ params }: ProjectDetailProps) {
               {key.replace(/_/g, " ")}
             </span>
           ))}
-          <span className="text-xs text-slate-400">•</span>
-          <span className="text-xs font-medium text-slate-600">{project.industry}</span>
+          {project.industry &&
+            !project.serviceKeys.some(
+              (k) =>
+                k.toLowerCase() === project.industry.toLowerCase() ||
+                k.replace(/_/g, " ").toLowerCase() ===
+                  project.industry.replace(/_/g, " ").toLowerCase()
+            ) && (
+              <>
+                <span className="text-xs text-slate-400">•</span>
+                <span className="text-xs font-medium text-slate-600">{project.industry}</span>
+              </>
+            )}
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-extrabold text-text tracking-tight leading-tight">
@@ -164,14 +174,27 @@ export default function ProjectDetailPage({ params }: ProjectDetailProps) {
       {/* 3.1 DEMO VIDEO PLAYER (IF AVAILABLE) */}
       {videoSrc && (
         <section className="space-y-4" aria-labelledby="video-walkthrough-heading">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <h2 id="video-walkthrough-heading" className="text-xl sm:text-2xl font-bold text-text flex items-center">
               <Play className="w-5 h-5 mr-2 text-primary fill-primary" />
               Project Demo &amp; Production Walkthrough
             </h2>
-            <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-semibold border border-emerald-200">
-              Live Video Recording
-            </span>
+            <div className="flex items-center space-x-2">
+              <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-semibold border border-emerald-200">
+                Live Video Recording
+              </span>
+              {videoSrc.includes("drive.google.com") && (
+                <a
+                  href={videoSrc.replace("/preview", "/view")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 font-medium inline-flex items-center transition-colors"
+                >
+                  <ExternalLink className="w-3 h-3 mr-1" />
+                  Open in Drive
+                </a>
+              )}
+            </div>
           </div>
 
           <div className="relative aspect-video w-full rounded-lg overflow-hidden border border-slate-700 bg-slate-950 shadow-xl">
@@ -225,9 +248,11 @@ export default function ProjectDetailPage({ params }: ProjectDetailProps) {
 
           <div>
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-1">
-              Industry
+              Category
             </span>
-            <div className="text-text font-semibold truncate">{project.industry}</div>
+            <div className="text-text font-semibold truncate">
+              {project.serviceKeys[0]?.replace(/_/g, " ") || project.industry.replace(/_/g, " ")}
+            </div>
           </div>
 
           <div>
@@ -326,12 +351,23 @@ export default function ProjectDetailPage({ params }: ProjectDetailProps) {
           </div>
 
           {/* Approved external links */}
-          {(project.links.demo || project.links.repository || project.links.paper) && (
+          {(project.links.demo || project.links.repository || project.links.paper || videoSrc) && (
             <div className="bg-surface rounded-md border border-border p-6 space-y-3">
               <h3 className="text-sm font-bold uppercase tracking-wider text-text">
                 Project Links
               </h3>
               <div className="space-y-2 text-sm">
+                {videoSrc && (
+                  <a
+                    href={videoSrc.replace("/preview", "/view")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center text-blue-600 hover:underline font-semibold"
+                  >
+                    <Play className="w-4 h-4 mr-2 fill-blue-600" />
+                    Video Demo (Drive)
+                  </a>
+                )}
                 {project.links.demo && (
                   <a
                     href={project.links.demo}

@@ -1,18 +1,15 @@
 import fs from "fs";
 import path from "path";
 
-const projects = [
-  { id: "PRJ-0001", title: "Agricultural Land & Crop System", color: "#16a34a" },
-  { id: "PRJ-0002", title: "HR Document OCR Pipeline", color: "#2563eb" },
-  { id: "PRJ-0003", title: "PAB Academic Portal Automation", color: "#7c3aed" },
-  { id: "PRJ-0004", title: "Zalo Medical Consultation Bot", color: "#0891b2" },
-  { id: "PRJ-0005", title: "Autonomous Research News Agent", color: "#d97706" },
-  { id: "PRJ-0006", title: "Education Omnichannel Lead Routing", color: "#4f46e5" },
-  { id: "PRJ-0007", title: "Medical Device Qualification Engine", color: "#059669" },
-  { id: "PRJ-0008", title: "Low-Latency Speech Pipeline", color: "#dc2626" },
-  { id: "PRJ-0009", title: "STEM Interactive Physics Lab", color: "#ea580c" },
-  { id: "PRJ-0010", title: "Autonomous Edge RC Rover", color: "#475569" },
-];
+const CATEGORY_COLORS: Record<string, string> = {
+  AI_AGENT: "#2563eb",
+  WORKFLOW_AUTOMATION: "#7c3aed",
+  DOCUMENT_AI_OCR: "#0891b2",
+  ZALO_CUSTOMER_SERVICE: "#059669",
+  CUSTOM_MANAGEMENT_SYSTEM: "#16a34a",
+  AI_TRAINING: "#d97706",
+  OTHER: "#475569",
+};
 
 function generateSvgCard(id: string, title: string, color: string, subtitle: string): string {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
@@ -46,6 +43,15 @@ function generateSvgCard(id: string, title: string, color: string, subtitle: str
 
 export function syncMedia() {
   const baseDir = path.join(process.cwd(), "public/media/generated");
+  const projectsPath = path.join(process.cwd(), "src/content/generated/projects.json");
+
+  if (!fs.existsSync(projectsPath)) {
+    console.warn("[SyncMedia] projects.json does not exist. Skipping media generation.");
+    return;
+  }
+
+  const raw = fs.readFileSync(projectsPath, "utf8");
+  const projects: Array<{ id: string; title: string; serviceKeys?: string[] }> = JSON.parse(raw);
 
   for (const prj of projects) {
     const prjDir = path.join(baseDir, prj.id);
@@ -53,12 +59,15 @@ export function syncMedia() {
       fs.mkdirSync(prjDir, { recursive: true });
     }
 
+    const category = prj.serviceKeys?.[0] || "OTHER";
+    const color = CATEGORY_COLORS[category] || "#2563eb";
+
     // Cover SVG
-    const coverSvg = generateSvgCard(prj.id, prj.title, prj.color, "Production System Architecture & Case Study");
+    const coverSvg = generateSvgCard(prj.id, prj.title, color, "Production System Architecture & Case Study");
     fs.writeFileSync(path.join(prjDir, "cover.webp"), coverSvg);
 
     // Gallery SVG
-    const gallerySvg = generateSvgCard(prj.id, `${prj.title} - Workflow`, prj.color, "Operational Dashboard & Verification Interface");
+    const gallerySvg = generateSvgCard(prj.id, `${prj.title} - Workflow`, color, "Operational Dashboard & Verification Interface");
     fs.writeFileSync(path.join(prjDir, "gallery-01.webp"), gallerySvg);
   }
 

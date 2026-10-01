@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "snapshotVersion": "20261001T065130_6b0d9719",
-  "generatedAt": "2026-10-01T06:51:30.003Z",
+  "snapshotVersion": "20261001T134145_54da9c3c",
+  "generatedAt": "2026-10-01T13:41:45.426Z",
   "projectCount": 11,
   "serviceCount": 7,
-  "contentSha256": "6b0d9719ede461b61bf460c69d42f61190d1c74323fe15cf6444cba9d10f304b",
-  "source": "google-sheets-n8n-sync"
+  "contentSha256": "54da9c3cdedcfc6b890f80eec5e450f145dbe858efec9a091d29470d1bbe2f4e",
+  "source": "google-sheets-authoritative"
 }

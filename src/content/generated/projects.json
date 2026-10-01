@@ -1,5 +1,55 @@
 [
   {
+    "id": "PRJ-AGENT-01",
+    "slug": "study-abroad-admissions-ai-assistant-in-progress",
+    "title": "Study-Abroad Admissions AI Assistant (In Progress)",
+    "projectType": "PERSONAL",
+    "client": null,
+    "serviceKeys": [
+      "AI_AGENT"
+    ],
+    "industry": "AI_AGENT",
+    "technologies": [
+      "n8n",
+      "Google Sheets",
+      "Google Drive",
+      "Gmail",
+      "RAG",
+      "Zalo OA"
+    ],
+    "summary": "AI-assisted admissions workflow that helps counselors answer program questions, organize applicant documents, and track follow-up across Zalo and Google Workspace.",
+    "problemMarkdown": "Designed a staged architecture using Zalo, Google Sheets, Google Drive, Gmail, and a retrieval layer for grounded answers. The project is in active development, with human review retained for admissions advice, document checks, and payment-related actions.",
+    "solutionMarkdown": "Designed a staged architecture using Zalo, Google Sheets, Google Drive, Gmail, and a retrieval layer for grounded answers. The project is in active development, with human review retained for admissions advice, document checks, and payment-related actions.",
+    "roleMarkdown": "Lead AI Engineer",
+    "implementationMarkdown": null,
+    "resultsMarkdown": "AI-assisted admissions workflow that helps counselors answer program questions, organize applicant documents, and track follow-up across Zalo and Google Workspace.",
+    "resultHighlight": null,
+    "cover": {
+      "src": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&h=900&fit=crop",
+      "width": 1600,
+      "height": 900,
+      "alt": "Study-Abroad Admissions AI Assistant (In Progress)"
+    },
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Study-Abroad Admissions AI Assistant (In Progress) - Preview",
+        "caption": "Study-Abroad Admissions AI Assistant (In Progress)"
+      }
+    ],
+    "links": {
+      "demo": "https://portfolio.aihoc.ai.vn",
+      "repository": "https://github.com/danhphan",
+      "paper": null
+    },
+    "videoUrl": "https://drive.google.com/file/d/1J22aVAFLuu1G53QiySD092hT3nRxXXpn/preview",
+    "featuredRank": 1,
+    "publishedAt": "2026-10-01T06:51:25.580Z",
+    "updatedAt": "2026-10-01T13:41:45.012Z"
+  },
+  {
     "id": "PRJ-0001",
     "slug": "agricultural-land-crop-production-management-system",
     "title": "Agricultural Land & Crop Production Management System",
@@ -30,15 +80,24 @@
       "height": 900,
       "alt": "Agricultural Land & Crop Production Management System"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Agricultural Land & Crop Production Management System - Preview",
+        "caption": "Agricultural Land & Crop Production Management System"
+      }
+    ],
     "links": {
       "demo": null,
       "repository": null,
       "paper": null
     },
-    "featuredRank": 1,
+    "videoUrl": "https://drive.google.com/file/d/1_P4FcA0bwIj4QXkmBL_urw4eyexlSbTV/preview",
+    "featuredRank": 2,
     "publishedAt": "2026-10-01T06:51:25.580Z",
-    "updatedAt": "2026-10-01T06:51:25.580Z"
+    "updatedAt": "2026-10-01T13:41:45.016Z"
   },
   {
     "id": "PRJ-0002",
@@ -71,15 +130,24 @@
       "height": 900,
       "alt": "HR Employment Document Automation"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1450133064473-71024230f91b?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "HR Employment Document Automation - Preview",
+        "caption": "HR Employment Document Automation"
+      }
+    ],
     "links": {
       "demo": null,
       "repository": null,
       "paper": null
     },
-    "featuredRank": 1,
+    "videoUrl": "https://drive.google.com/file/d/1GLqXS2P9SbEufmGPiPiG580MLwfs3N3x/preview",
+    "featuredRank": 3,
     "publishedAt": "2026-10-01T06:51:25.580Z",
-    "updatedAt": "2026-10-01T06:51:25.580Z"
+    "updatedAt": "2026-10-01T13:41:45.017Z"
   },
   {
     "id": "PRJ-0003",
@@ -112,56 +180,24 @@
       "height": 900,
       "alt": "University Academic Portal Automation"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "University Academic Portal Automation - Preview",
+        "caption": "University Academic Portal Automation"
+      }
+    ],
     "links": {
       "demo": null,
       "repository": null,
       "paper": null
     },
-    "featuredRank": 1,
+    "videoUrl": "https://drive.google.com/file/d/1Q603JVwjkz-J38jRatoM4Uj1eGgDJXZZ/preview",
+    "featuredRank": 4,
     "publishedAt": "2026-10-01T06:51:25.580Z",
-    "updatedAt": "2026-10-01T06:51:25.580Z"
-  },
-  {
-    "id": "PRJ-AGENT-01",
-    "slug": "study-abroad-admissions-ai-assistant-in-progress",
-    "title": "Study-Abroad Admissions AI Assistant (In Progress)",
-    "projectType": "PERSONAL",
-    "client": null,
-    "serviceKeys": [
-      "AI_AGENT"
-    ],
-    "industry": "AI_AGENT",
-    "technologies": [
-      "n8n",
-      "Google Sheets",
-      "Google Drive",
-      "Gmail",
-      "RAG",
-      "Zalo OA"
-    ],
-    "summary": "AI-assisted admissions workflow that helps counselors answer program questions, organize applicant documents, and track follow-up across Zalo and Google Workspace.",
-    "problemMarkdown": "Designed a staged architecture using Zalo, Google Sheets, Google Drive, Gmail, and a retrieval layer for grounded answers. The project is in active development, with human review retained for admissions advice, document checks, and payment-related actions.",
-    "solutionMarkdown": "Designed a staged architecture using Zalo, Google Sheets, Google Drive, Gmail, and a retrieval layer for grounded answers. The project is in active development, with human review retained for admissions advice, document checks, and payment-related actions.",
-    "roleMarkdown": "Lead AI Engineer",
-    "implementationMarkdown": null,
-    "resultsMarkdown": "AI-assisted admissions workflow that helps counselors answer program questions, organize applicant documents, and track follow-up across Zalo and Google Workspace.",
-    "resultHighlight": null,
-    "cover": {
-      "src": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&h=900&fit=crop",
-      "width": 1600,
-      "height": 900,
-      "alt": "Study-Abroad Admissions AI Assistant (In Progress)"
-    },
-    "gallery": [],
-    "links": {
-      "demo": "https://portfolio.aihoc.ai.vn",
-      "repository": "https://github.com/danhphan",
-      "paper": null
-    },
-    "featuredRank": 1,
-    "publishedAt": "2026-10-01T06:51:25.580Z",
-    "updatedAt": "2026-10-01T06:51:25.580Z"
+    "updatedAt": "2026-10-01T13:41:45.017Z"
   },
   {
     "id": "PRJ-0004",
@@ -194,15 +230,24 @@
       "height": 900,
       "alt": "Zalo Medical Records & Consultation Assistant"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Zalo Medical Records & Consultation Assistant - Preview",
+        "caption": "Zalo Medical Records & Consultation Assistant"
+      }
+    ],
     "links": {
       "demo": null,
       "repository": null,
       "paper": null
     },
+    "videoUrl": "https://drive.google.com/file/d/1IbmBV9ne7pYUFcRnin3QZoA2cv2rnoHt/preview",
     "featuredRank": null,
     "publishedAt": "2026-10-01T06:51:25.580Z",
-    "updatedAt": "2026-10-01T06:51:25.580Z"
+    "updatedAt": "2026-10-01T13:41:45.017Z"
   },
   {
     "id": "PRJ-0005",
@@ -235,15 +280,24 @@
       "height": 900,
       "alt": "AI Newspaper Monitoring & Report Generation"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "AI Newspaper Monitoring & Report Generation - Preview",
+        "caption": "AI Newspaper Monitoring & Report Generation"
+      }
+    ],
     "links": {
       "demo": "https://example.com/demo",
       "repository": "https://github.com/danhphan/ai-newspaper-agent",
       "paper": null
     },
+    "videoUrl": "https://drive.google.com/file/d/13I-S7gqkAeB8pA5M5yynI5tWdiKkX-Qw/preview",
     "featuredRank": null,
     "publishedAt": "2026-10-01T06:51:25.580Z",
-    "updatedAt": "2026-10-01T06:51:25.580Z"
+    "updatedAt": "2026-10-01T13:41:45.018Z"
   },
   {
     "id": "PRJ-0006",
@@ -275,15 +329,24 @@
       "height": 900,
       "alt": "Education Center Student & Booking Automation"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Education Center Student & Booking Automation - Preview",
+        "caption": "Education Center Student & Booking Automation"
+      }
+    ],
     "links": {
       "demo": null,
       "repository": null,
       "paper": null
     },
+    "videoUrl": "https://drive.google.com/file/d/1B3E_yOEGtUeNjb-B-8R2bMBH_it8k-ju/preview",
     "featuredRank": null,
     "publishedAt": "2026-10-01T06:51:25.580Z",
-    "updatedAt": "2026-10-01T06:51:25.580Z"
+    "updatedAt": "2026-10-01T13:41:45.018Z"
   },
   {
     "id": "PRJ-0007",
@@ -316,15 +379,24 @@
       "height": 900,
       "alt": "Medical Device Lead Qualification Workflow"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Medical Device Lead Qualification Workflow - Preview",
+        "caption": "Medical Device Lead Qualification Workflow"
+      }
+    ],
     "links": {
       "demo": null,
       "repository": null,
       "paper": null
     },
+    "videoUrl": "https://drive.google.com/file/d/1C2dnwT5mKwl7qrSH3-xJP9xnML6CVlrt/preview",
     "featuredRank": null,
     "publishedAt": "2026-10-01T06:51:25.580Z",
-    "updatedAt": "2026-10-01T06:51:25.580Z"
+    "updatedAt": "2026-10-01T13:41:45.018Z"
   },
   {
     "id": "PRJ-0008",
@@ -358,15 +430,24 @@
       "height": 900,
       "alt": "Vietnamese ASR & TTS Inference Platform"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Vietnamese ASR & TTS Inference Platform - Preview",
+        "caption": "Vietnamese ASR & TTS Inference Platform"
+      }
+    ],
     "links": {
       "demo": null,
       "repository": "https://github.com/danhphan/low-latency-speech-pipeline",
       "paper": null
     },
+    "videoUrl": null,
     "featuredRank": null,
     "publishedAt": "2026-10-01T06:51:25.580Z",
-    "updatedAt": "2026-10-01T06:51:25.580Z"
+    "updatedAt": "2026-10-01T13:41:45.019Z"
   },
   {
     "id": "PRJ-0009",
@@ -398,15 +479,24 @@
       "height": 900,
       "alt": "Multi-Platform Content Publishing Automation"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Multi-Platform Content Publishing Automation - Preview",
+        "caption": "Multi-Platform Content Publishing Automation"
+      }
+    ],
     "links": {
       "demo": "https://example.com/stem-demo",
       "repository": "https://github.com/danhphan/stem-simulation",
       "paper": null
     },
+    "videoUrl": null,
     "featuredRank": null,
     "publishedAt": "2026-10-01T06:51:25.580Z",
-    "updatedAt": "2026-10-01T06:51:25.580Z"
+    "updatedAt": "2026-10-01T13:41:45.019Z"
   },
   {
     "id": "PRJ-0010",
@@ -439,14 +529,23 @@
       "height": 900,
       "alt": "Legal Document Intelligence Workflow"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1600&h=900&fit=crop",
+        "width": 1600,
+        "height": 900,
+        "alt": "Legal Document Intelligence Workflow - Preview",
+        "caption": "Legal Document Intelligence Workflow"
+      }
+    ],
     "links": {
       "demo": null,
       "repository": "https://github.com/danhphan/autonomous-rc-iot",
       "paper": null
     },
+    "videoUrl": null,
     "featuredRank": null,
     "publishedAt": "2026-10-01T06:51:25.580Z",
-    "updatedAt": "2026-10-01T06:51:25.580Z"
+    "updatedAt": "2026-10-01T13:41:45.020Z"
   }
 ]

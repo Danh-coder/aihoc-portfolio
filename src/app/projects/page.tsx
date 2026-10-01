@@ -56,8 +56,23 @@ export default function ProjectsPage({ searchParams }: ProjectsPageProps) {
   // Paginate projects (12 per page)
   const pagination = paginateProjects(filtered, currentPage, 12);
 
-  // Extract unique industries and technologies across all projects for filter menus
-  const allIndustries = Array.from(new Set(allProjects.map((p) => p.industry))).sort();
+  // Extract unique industries across all projects for filter menus (excluding raw service keys to prevent duplicate filters)
+  const allIndustries = Array.from(
+    new Set(
+      allProjects
+        .map((p) => p.industry)
+        .filter(
+          (ind) =>
+            ind &&
+            !services.some(
+              (s) =>
+                s.serviceKey.toLowerCase() === ind.toLowerCase() ||
+                s.serviceKey.replace(/_/g, " ").toLowerCase() ===
+                  ind.replace(/_/g, " ").toLowerCase()
+            )
+        )
+    )
+  ).sort();
   const allTechnologies = Array.from(
     new Set(allProjects.flatMap((p) => p.technologies))
   ).sort();
